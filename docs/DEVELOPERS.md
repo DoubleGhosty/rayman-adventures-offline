@@ -20,7 +20,7 @@ OfflineServerProvider (a ContentProvider, started by Android before any activity
 
 Three kinds of changes make this work:
 
-- **Native patches and hooks** in `lib/arm64-v8a/libuaf.so`: network redirection, TLS check removed, and small code caves where the game needed a server answer that can no longer be produced the same way (eggs, tickets, incubator, shop guards). See `scripts/*_hooks.py`.
+- **Native patches and hooks** in `lib/arm64-v8a/libuaf.so`: network redirection, TLS check removed, and small code caves where the game needed a server answer that can no longer be produced the same way (eggs, tickets, incubator, shop guards, events that come back every year). See `scripts/*_hooks.py`.
 - **The embedded server** (`offline_server/src/com/rayman/offline/`, compiled to an extra `classesN.dex`) answers every request the game makes. It keeps its state per save slot in the app's `files/rlc/` folder.
 - **Small bytecode patches** to the game's own Java code (`scripts/dex_patches.py`): the Google Play Games sign-in is disabled.
 
@@ -108,7 +108,6 @@ A new seasonal calendar reaches the game only through `userprofile/meta` sent af
 
 ## Known limits and ideas
 
-- A seasonal event already played stays "finished" in the save, so it may not come back the following year.
 - Purchases with seasonal currency, and the marathon run itself, are not fully tested yet.
 - The title-screen login loops after a restart (see above); the game still logs in when the player taps Play.
 - Only tested on WSA, not yet on a real ARM64 phone.

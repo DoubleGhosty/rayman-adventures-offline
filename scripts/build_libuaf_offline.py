@@ -174,6 +174,14 @@ for off, patch in sh.items():
     data[off:off + len(patch)] = patch
 print(f"Applied store hooks ({len(sh[STORE_CAVE])} bytes cave at {STORE_CAVE:#x}).")
 
+# --- Seasonal events that come back every year (scripts/event_hooks.py) ---
+from event_hooks import assemble as assemble_event_hooks, CAVE as EVENT_CAVE
+ev = assemble_event_hooks(data)
+assert data[EVENT_CAVE:EVENT_CAVE + len(ev[EVENT_CAVE])] == bytes(len(ev[EVENT_CAVE])), "event cave not empty"
+for off, patch in ev.items():
+    data[off:off + len(patch)] = patch
+print(f"Applied seasonal event hooks ({len(ev[EVENT_CAVE])} bytes cave at {EVENT_CAVE:#x}).")
+
 if "--debug" in sys.argv:
     from debug_hooks import assemble as assemble_debug_hooks
     dbg = assemble_debug_hooks()
