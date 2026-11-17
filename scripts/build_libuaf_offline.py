@@ -166,6 +166,14 @@ for off, patch in eg.items():
     data[off:off + len(patch)] = patch
 print(f"Applied egg pick hooks ({len(eg[EGG_CAVE])} bytes cave at {EGG_CAVE:#x}).")
 
+# --- Shop guards: missing real-money packs return false instead of crashing (scripts/store_hooks.py) ---
+from store_hooks import assemble as assemble_store_hooks, CAVE as STORE_CAVE
+sh = assemble_store_hooks(data)
+assert data[STORE_CAVE:STORE_CAVE + len(sh[STORE_CAVE])] == bytes(len(sh[STORE_CAVE])), "store cave not empty"
+for off, patch in sh.items():
+    data[off:off + len(patch)] = patch
+print(f"Applied store hooks ({len(sh[STORE_CAVE])} bytes cave at {STORE_CAVE:#x}).")
+
 if "--debug" in sys.argv:
     from debug_hooks import assemble as assemble_debug_hooks
     dbg = assemble_debug_hooks()

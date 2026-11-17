@@ -23,18 +23,22 @@ import java.util.Calendar;
  * globals when userprofile/meta's gameGlobals.versionTime differs from its cached copy, so versionTime
  * changes with each scheduled event.
  *
- * Event ids (RLC_SeasonalEventManager::eSeasonalEvent, type from getEventType, costume from
- * getCurrentSeasonalEventCostume, matched against the shop catalogue): hunts 1 (Teensy Bunny),
- * 2 (Globox Summer), 3 (Globox Halloween), 5 (Barbara Winter), 6 (Rayman Renaissance), 9 (Rayman
- * Raybeard); spin wheels 7 (Globox Glombrero), 10 "Expedition Rayhistorik" (shop "Maglace-Zin", costume
- * Barbarrrrr, currency prehistoric meat - seen in game 2026-11-17), 13 (Rayman Spaceray), 17 (Barbara
- * IceAge); marathons 8 (Rayman Raybolt), 11 (Globox Egyptian), 12 (Barbara Sakura), 16 (Rayman RayWiz).
+ * Event ids (RLC_SeasonalEventManager::eSeasonalEvent, type from getEventType): hunts 1, 2, 3, 5, 6, 9;
+ * spin wheels 7, 10, 13, 17; marathons 8, 11, 12, 16. Seen in game (2026-11-17): 3 = "La chasse au
+ * tresor de Raybarbe" (doubloons hidden in the game; shop: Jolly-Roger ticket, sunken egg, Raybarbe),
+ * 8 = a marathon (the daily challenge in event mode, shop "Echoppe": parchment ticket, Chatoeuf,
+ * Raystidigitateur), 10 = "Expedition Rayhistorik" (Captain's wheel, prehistoric meat, shop
+ * "Maglace-Zin": fur ticket, frozen egg, Barbarrrrr).
  * Id 4 (a hunt without costume) is left out. The game shows events from the 6th adventure on
  * (canDisplaySeasonalEvent: universe+0x724 > 4), with an intro popup once a day on the map.
  *
  * Calendar (our choice, Ubisoft's is lost): the year is cut into 14 slots of 26 days from January 1st
- * (device time), one event per slot, roughly in season: 23 days of event, then 3 "last chance" days to
- * spend the event currency (currentSeasonalEventCompleteEndingTime2), then the next one starts.
+ * (device time), one event per slot: 23 days of event, then 3 "last chance" days to spend the event
+ * currency (currentSeasonalEventCompleteEndingTime2), then the next one starts. The whole calendar of
+ * YEARS years goes in one download, one override per event with a GameGlobalsDateIntervalCondition
+ * (polymorphic JSON object, "_CLASS_NAME"): the game picks the current event itself at each launch.
+ * The title-screen login that sends userprofile/meta (and so the download) does not always succeed
+ * after a restart; with the whole calendar cached this no longer matters.
  */
 final class SeasonalEvents {
 
@@ -47,42 +51,55 @@ final class SeasonalEvents {
     static final int EVENT_DAYS = 23;
     /** Event of each slot, from January 1st. */
     static final int[] CALENDAR = {17, 12, 6, 1, 7, 11, 9, 2, 16, 13, 8, 3, 10, 5};
-    /** Log labels: the costume of each event (names are in the game's texts; 10 seen in game). */
-    static final String[] NAMES = {"", "hunt (Teensy Bunny)", "hunt (Globox Summer)", "hunt (Globox Halloween)", "",
-            "hunt (Barbara Winter)", "hunt (Rayman Renaissance)", "wheel (Globox Glombrero)",
-            "marathon (Rayman Raybolt)", "hunt (Rayman Raybeard)", "wheel Expedition Rayhistorik (Barbarrrrr)",
-            "marathon (Globox Egyptian)", "marathon (Barbara Sakura)", "wheel (Rayman Spaceray)", "", "",
-            "marathon (Rayman RayWiz)", "wheel (Barbara IceAge)"};
+    /** Log labels (type; names seen in game for 3, 8 and 10, the others from their costume constant). */
+    static final String[] NAMES = {"", "hunt 1", "hunt 2", "hunt La chasse au tresor de Raybarbe", "",
+            "hunt 5", "hunt 6", "wheel 7", "marathon 8 (shop Echoppe: Chatoeuf, Raystidigitateur)", "hunt 9",
+            "wheel Expedition Rayhistorik", "marathon 11", "marathon 12", "wheel 13", "", "", "marathon 16",
+            "wheel 17"};
 
     private SeasonalEvents() {
     }
 
-    /** Current event: {id, start, end, completeEnd} (millis), id 0 = none. */
-    static long[] current() {
-        long now = System.currentTimeMillis();
-        JSONObject s = ServerState.section("seasonalEvents");
-        if (s.has("forcedId") && s.optLong("forcedCompleteEnd", 0) > now) {
+    /** Years of calendar sent at once (from the current one): the game picks the event itself. */
+    static final int YEARS = 5;
+
+    /** Forced event {id, start, end, completeEnd} (admin), or null. */
+    static long[] forced() {
+        JSONObject s = forcedState();
+        if (s.has("forcedId") && s.optLong("forcedCompleteEnd", 0) > System.currentTimeMillis()) {
             return new long[] {s.optInt("forcedId"), s.optLong("forcedStart"), s.optLong("forcedEnd"),
                     s.optLong("forcedCompleteEnd")};
         }
+        return null;
+    }
+
+    /** Event of a calendar slot: {id, start, end, completeEnd} (millis, device time zone). */
+    static long[] slot(int year, int slot) {
         Calendar c = Calendar.getInstance();
-        c.setTimeInMillis(now);
-        int slot = Math.min((c.get(Calendar.DAY_OF_YEAR) - 1) / SLOT_DAYS, CALENDAR.length - 1);
+        c.clear();
+        c.set(Calendar.YEAR, year);
         c.set(Calendar.DAY_OF_YEAR, 1 + slot * SLOT_DAYS);
-        c.set(Calendar.HOUR_OF_DAY, 0);
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
         long start = c.getTimeInMillis();
         c.add(Calendar.DAY_OF_YEAR, EVENT_DAYS);
         long end = c.getTimeInMillis();
         if (slot == CALENDAR.length - 1) {
-            c.set(Calendar.DAY_OF_YEAR, c.getActualMaximum(Calendar.DAY_OF_YEAR));   // last slot: to December 31st
-            c.add(Calendar.DAY_OF_YEAR, 1);
+            c.clear();
+            c.set(Calendar.YEAR, year + 1);                // last slot: to December 31st
         } else {
             c.add(Calendar.DAY_OF_YEAR, SLOT_DAYS - EVENT_DAYS);
         }
         return new long[] {CALENDAR[slot], start, end, c.getTimeInMillis()};
+    }
+
+    /** Current event (logs, versionTime). */
+    static long[] current() {
+        long[] f = forced();
+        if (f != null) {
+            return f;
+        }
+        Calendar c = Calendar.getInstance();
+        int slot = Math.min((c.get(Calendar.DAY_OF_YEAR) - 1) / SLOT_DAYS, CALENDAR.length - 1);
+        return slot(c.get(Calendar.YEAR), slot);
     }
 
     /**
@@ -96,14 +113,26 @@ final class SeasonalEvents {
         return f.format(new java.util.Date(millis)) + "+00:00";
     }
 
-    /** gameGlobals.versionTime of userprofile/meta: changes with each scheduled event. */
+    /**
+     * gameGlobals.versionTime of userprofile/meta: the game downloads the globals when it changes. The
+     * whole calendar is sent at once, so it only changes with the covered years (or a forced event).
+     */
     static String versionTime() {
-        return utc(current()[1]);
+        long[] f = forced();
+        if (f != null) {
+            return utc(f[1]);
+        }
+        Calendar c = Calendar.getInstance();
+        c.clear();
+        c.set(Calendar.YEAR, Calendar.getInstance().get(Calendar.YEAR));
+        return utc(c.getTimeInMillis() + 1000L * CALENDAR_REVISION);
     }
 
-    /** GET v1/gameglobals/getGameGlobals. */
-    static JSONObject gameGlobals() throws JSONException {
-        long[] ev = current();
+    /** Bumped when the calendar's content changes, so that installed games download it again. */
+    static final int CALENDAR_REVISION = 1;
+
+    /** One override per event: the template fields, applied while its date condition is valid. */
+    private static JSONObject override(long[] ev, boolean conditional) throws JSONException {
         JSONObject params = new JSONObject();
         params.put("currentSeasonalEventID2", (int) ev[0]);
         params.put("currentSeasonalEventStartingTime2", utc(ev[1]));
@@ -111,19 +140,44 @@ final class SeasonalEvents {
         params.put("currentSeasonalEventCompleteEndingTime2", utc(ev[3]));
         // same shape as Ubisoft's overrides (gameglobals.isg.ckd): the template's fields + _CLASS_NAME
         params.put("_CLASS_NAME", "RLC_SeasonalEventManager_Template");
-        JSONObject json = params;
-
+        JSONArray conditions = new JSONArray();
+        if (conditional) {
+            // online::GameGlobalsDateIntervalCondition, a factory object (SerializerJson: "_CLASS_NAME")
+            JSONObject interval = new JSONObject();
+            interval.put("_CLASS_NAME", "GameGlobalsDateIntervalCondition");
+            interval.put("start", utc(ev[1]));
+            interval.put("end", utc(ev[3]));
+            interval.put("utc", true);
+            conditions.put(interval);
+        }
         JSONObject condition = new JSONObject();
-        condition.put("conditions", new JSONArray());
+        condition.put("conditions", conditions);
         condition.put("needAll", true);
         condition.put("priority", 0);
         condition.put("hotReload", true);
         JSONObject override = new JSONObject();
-        override.put("json", json.toString());
+        override.put("json", params.toString());
         override.put("condition", condition);
-        override.put("name", "offlineSeasonalEvent");
+        override.put("name", "seasonalEvent" + ev[0] + "_" + utc(ev[1]).substring(0, 10));
+        return override;
+    }
+
+    /** GET v1/gameglobals/getGameGlobals: the calendar of YEARS years (or the forced event). */
+    static JSONObject gameGlobals() throws JSONException {
+        JSONArray overrides = new JSONArray();
+        long[] f = forced();
+        if (f != null) {
+            overrides.put(override(f, false));
+        } else {
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            for (int y = year; y < year + YEARS; y++) {
+                for (int i = 0; i < CALENDAR.length; i++) {
+                    overrides.put(override(slot(y, i), true));
+                }
+            }
+        }
         JSONObject file = new JSONObject();
-        file.put("overrides", new JSONArray().put(override));
+        file.put("overrides", overrides);
         // ITF JSON maps are objects: the member name is the KEY (a StringID as digits), the member the
         // VAL (an array of {"KEY","VAL"} reads KEY = 0 and the value one level too deep)
         JSONObject files = new JSONObject();
@@ -135,8 +189,9 @@ final class SeasonalEvents {
         data.put("versionTime", versionTime());
         JSONObject out = new JSONObject();
         out.put("data", encrypt(data.toString()));
-        Log.i(TAG, "seasonal event: " + (ev[0] == 0 ? "none" : NAMES[(int) ev[0]] + " (id " + ev[0] + ") "
-                + Incubator.format(ev[1]) + " -> " + Incubator.format(ev[2]) + " / " + Incubator.format(ev[3])));
+        long[] ev = current();
+        Log.i(TAG, "seasonal events: " + overrides.length() + " override(s), now " + NAMES[(int) ev[0]]
+                + " (id " + ev[0] + ") " + utc(ev[1]) + " -> " + utc(ev[2]) + " / " + utc(ev[3]));
         return out;
     }
 
@@ -183,9 +238,18 @@ final class SeasonalEvents {
         return (((z >>> 5) ^ (y << 2)) + ((y >>> 3) ^ (z << 4))) ^ ((sum ^ y) + (TEA_KEY[(p & 3) ^ e] ^ z));
     }
 
+    /** Forced event (admin), shared by all save slots: files/rlc/seasonal_forced.json. */
+    private static java.io.File forcedFile() {
+        return new java.io.File(OfflineServer.dataDir, "seasonal_forced.json");
+    }
+
+    private static JSONObject forcedState() {
+        return Slots.read(forcedFile());
+    }
+
     /** Admin: runs event id now for the given days (id 0 = back to the calendar). */
     static JSONObject force(int id, double days) throws JSONException {
-        JSONObject s = ServerState.section("seasonalEvents");
+        JSONObject s = forcedState();
         if (id <= 0) {
             s.remove("forcedId");
         } else {
@@ -196,7 +260,7 @@ final class SeasonalEvents {
             s.put("forcedEnd", end);
             s.put("forcedCompleteEnd", end + 3 * 86400000L);
         }
-        ServerState.save();
+        Slots.writeJson(forcedFile(), s);
         return gameGlobals();
     }
 }

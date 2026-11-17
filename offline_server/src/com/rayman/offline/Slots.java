@@ -186,6 +186,23 @@ final class Slots {
         }
     }
 
+    static void writeJson(File f, JSONObject o) {
+        File tmp = new File(f.getPath() + ".tmp");
+        try {
+            FileOutputStream out = new FileOutputStream(tmp);
+            try {
+                out.write(o.toString().getBytes(UTF8));
+            } finally {
+                out.close();
+            }
+            if (!tmp.renameTo(f)) {
+                Log.e(TAG, "cannot replace " + f);
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "cannot write " + f, e);
+        }
+    }
+
     static JSONObject read(File f) {
         if (!f.exists()) {
             return new JSONObject();
