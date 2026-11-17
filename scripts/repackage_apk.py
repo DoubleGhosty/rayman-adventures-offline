@@ -39,6 +39,7 @@ if not os.path.exists(PATCHED_SO):
 
 sys.path.insert(0, BASE_DIR)
 from patch_manifest import patch_manifest
+from dex_patches import PATCHES as DEX_PATCHES
 
 # Game data (OBB) embedded in the APK by default: one file to install. --no-obb builds the light
 # APK that needs the separate main.2086.com.ubisoft.raymanadventures.obb in Android/obb/.
@@ -68,6 +69,9 @@ with zipfile.ZipFile(BASE_APK, 'r') as zin:
             if item.filename == "AndroidManifest.xml":
                 data = patch_manifest(data)
                 print("  AndroidManifest.xml: OfflineServerProvider declared")
+            if item.filename in DEX_PATCHES:
+                data = DEX_PATCHES[item.filename](data)
+                print(f"  {item.filename}: bytecode patches (scripts/dex_patches.py)")
             if item.filename == "res/raw/game.properties" and EMBED_OBB:
                 # Ubisoft's own "OBB in the APK" mode: InstallActivity.launchGameInstaller copies
                 # every assets/*.obb into getObbDir() when the OBB is missing, then starts the game.
