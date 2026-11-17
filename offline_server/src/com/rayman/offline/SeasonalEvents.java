@@ -147,7 +147,7 @@ final class SeasonalEvents {
     }
 
     /** Bumped when the calendar's content changes, so that installed games download it again. */
-    static final int CALENDAR_REVISION = 1;
+    static final int CALENDAR_REVISION = 2;          // 2: Ubisoft's own overrides sent again
 
     /** One override per event: the template fields, applied while its date condition is valid. */
     private static JSONObject override(long[] ev, boolean conditional) throws JSONException {
@@ -180,6 +180,47 @@ final class SeasonalEvents {
         return override;
     }
 
+    /**
+     * Ubisoft's last game globals, bundled with the game (enginedata/online/gameglobals.isg.ckd,
+     * extracted by tools/re/gameglobals.py into the asset offline/ubisoft_gameglobals.json):
+     * {path StringID: template JSON}. The game keeps only the newest globals (gameGlobals::readFromFile:
+     * the bundled file is skipped when the downloaded cache is newer), so our download must carry them
+     * too, or their values fall back to the templates' defaults: adventure durations and food refill
+     * (DynamicStoreConfig), magnifying glass price (100 gems), ticket weights, daily gifts (IAP manager).
+     */
+    static volatile JSONObject ubisoftOverrides = new JSONObject();
+
+    static void loadUbisoftOverrides(String json) {
+        try {
+            ubisoftOverrides = new JSONObject(json);
+        } catch (JSONException e) {
+            Log.e(TAG, "bad ubisoft_gameglobals.json", e);
+        }
+    }
+
+    private static void addUbisoftOverrides(JSONObject files) throws JSONException {
+        java.util.Iterator<String> it = ubisoftOverrides.keys();
+        while (it.hasNext()) {
+            String key = it.next();
+            JSONObject condition = new JSONObject();
+            condition.put("conditions", new JSONArray());
+            condition.put("needAll", true);
+            condition.put("priority", 0);
+            condition.put("hotReload", true);
+            JSONObject override = new JSONObject();
+            override.put("json", ubisoftOverrides.getString(key));
+            override.put("condition", condition);
+            override.put("name", "ubisoft_" + key);
+            JSONObject file = files.optJSONObject(key);
+            if (file == null) {
+                file = new JSONObject();
+                file.put("overrides", new JSONArray());
+                files.put(key, file);
+            }
+            file.getJSONArray("overrides").put(override);
+        }
+    }
+
     /** GET v1/gameglobals/getGameGlobals: the calendar of YEARS years (or the forced event). */
     static JSONObject gameGlobals() throws JSONException {
         JSONArray overrides = new JSONArray();
@@ -200,6 +241,7 @@ final class SeasonalEvents {
         // VAL (an array of {"KEY","VAL"} reads KEY = 0 and the value one level too deep)
         JSONObject files = new JSONObject();
         files.put(Long.toString(CONFIG_PATH_ID), file);
+        addUbisoftOverrides(files);
 
         JSONObject data = new JSONObject();
         data.put("variables", "");

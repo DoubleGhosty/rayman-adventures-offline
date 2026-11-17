@@ -123,6 +123,9 @@ def main():
     # Ubisoft's lucky ticket weight tables (dumped from the game by tools/re/dump_ticket_weights.py)
     shutil.copyfile(os.path.join(ROOT_DIR, "mock_data", "ticket_weights.json"),
                     os.path.join(ASSETS_DIR, "ticket_weights.json"))
+    # Ubisoft's own game globals overrides (extracted from the OBB by tools/re/gameglobals.py)
+    shutil.copyfile(os.path.join(ROOT_DIR, "mock_data", "ubisoft_gameglobals.json"),
+                    os.path.join(ASSETS_DIR, "ubisoft_gameglobals.json"))
     if not os.path.exists(KEYSTORE):
         # legacy PKCS12 (3DES + HmacSHA1): Android BouncyCastle cannot read the PBES2 default
         run([os.path.join(JDK_BIN, "keytool.exe"), "-J-Dkeystore.pkcs12.legacy", "-genkeypair", "-storetype", "PKCS12",

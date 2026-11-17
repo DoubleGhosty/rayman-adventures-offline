@@ -71,6 +71,11 @@ public final class OfflineServer {
         } catch (IOException e) {
             Log.e(TAG, "ticket_weights.json asset missing", e);
         }
+        try {
+            SeasonalEvents.loadUbisoftOverrides(new String(readAsset(app, "offline/ubisoft_gameglobals.json"), UTF8));
+        } catch (IOException e) {
+            Log.e(TAG, "ubisoft_gameglobals.json asset missing", e);
+        }
         // 127.0.0.1: native curl traffic (getaddrinfo/connect hooks)
         // ::1      : game server base URL patched to http://[::1]:18080 (Java NetworkController)
         for (String addr : new String[]{"127.0.0.1", "::1"}) {
