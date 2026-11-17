@@ -108,6 +108,6 @@ A new seasonal calendar reaches the game only through `userprofile/meta` sent af
 
 ## Known limits and ideas
 
-- Purchases with seasonal currency, and the marathon run itself, are not fully tested yet.
+- The marathon run itself is not fully tested yet (seasonal shop purchases are).
 - The title-screen login loops after a restart (see above); the game still logs in when the player taps Play.
 - Only tested on WSA, not yet on a real ARM64 phone.
