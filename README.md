@@ -13,8 +13,8 @@ Le jeu occupe environ 900 Mo une fois installé (l'APK garde une copie des donn�
 
 Testé sur Windows Subsystem for Android (ARM64 émulé). Une manette (Xbox, etc.) est reconnue si elle est connectée **avant** de lancer le jeu.
 
-**Fonctionne** : aventures, œufs et incubateur, élixirs, tickets (probabilités d'Ubisoft), Charlie, loupe, cadeau quotidien, mini-événements, défi quotidien (seul), 3 emplacements de sauvegarde, pubs récompensées (si les régies répondent encore).
-**Ne fonctionne plus** : achats en argent réel, Facebook et amis, classements mondiaux, synchronisation cloud, Everyplay, événements saisonniers (pour l'instant). Détails : `docs/AUDIT_2026-11-16.md` et `docs/DOSSIER_TECHNIQUE.md`.
+**Fonctionne** : aventures, œufs et incubateur, élixirs, tickets (probabilités d'Ubisoft), Charlie, loupe, cadeau quotidien, mini-événements, **événements saisonniers** (calendrier hors ligne, à partir de la 6e aventure), défi quotidien (seul), 3 emplacements de sauvegarde, pubs récompensées (si les régies répondent encore).
+**Ne fonctionne plus** : achats en argent réel, Facebook et amis, classements mondiaux, synchronisation cloud, Everyplay, connexion Google Play Jeux (supprimée). Détails : `docs/AUDIT_2026-11-16.md` et `docs/DOSSIER_TECHNIQUE.md`.
 
 ## 🔧 Recompiler
 

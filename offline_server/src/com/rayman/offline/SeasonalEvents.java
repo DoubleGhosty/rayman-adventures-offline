@@ -24,12 +24,13 @@ import java.util.Calendar;
  * changes with each scheduled event.
  *
  * Event ids (RLC_SeasonalEventManager::eSeasonalEvent, type from getEventType, costume from
- * getCurrentSeasonalEventCostume): hunts 1 Easter (Teensy Bunny), 2 Summer (Globox Summer),
- * 3 Halloween (Globox Halloween), 5 Winter (Barbara Winter), 6 Renaissance (Rayman Renaissance),
- * 9 Raybeard's treasure (Rayman Raybeard); spin wheels 7 Fiesta (Globox Glombrero), 10 Hell-O-Wheel
- * (Barbara Hellen), 13 Space (Rayman Spaceray), 17 Ice Age (Barbara IceAge); marathons 8 Land of the
- * Livid Dead (Rayman Raybolt), 11 Desert Kingdom (Globox Egyptian), 12 Sakura (Barbara Sakura),
- * 16 RayWiz (Rayman RayWiz). Id 4 (a hunt without costume) is left out.
+ * getCurrentSeasonalEventCostume, matched against the shop catalogue): hunts 1 (Teensy Bunny),
+ * 2 (Globox Summer), 3 (Globox Halloween), 5 (Barbara Winter), 6 (Rayman Renaissance), 9 (Rayman
+ * Raybeard); spin wheels 7 (Globox Glombrero), 10 "Expedition Rayhistorik" (shop "Maglace-Zin", costume
+ * Barbarrrrr, currency prehistoric meat - seen in game 2026-11-17), 13 (Rayman Spaceray), 17 (Barbara
+ * IceAge); marathons 8 (Rayman Raybolt), 11 (Globox Egyptian), 12 (Barbara Sakura), 16 (Rayman RayWiz).
+ * Id 4 (a hunt without costume) is left out. The game shows events from the 6th adventure on
+ * (canDisplaySeasonalEvent: universe+0x724 > 4), with an intro popup once a day on the map.
  *
  * Calendar (our choice, Ubisoft's is lost): the year is cut into 14 slots of 26 days from January 1st
  * (device time), one event per slot, roughly in season: 23 days of event, then 3 "last chance" days to
@@ -46,10 +47,12 @@ final class SeasonalEvents {
     static final int EVENT_DAYS = 23;
     /** Event of each slot, from January 1st. */
     static final int[] CALENDAR = {17, 12, 6, 1, 7, 11, 9, 2, 16, 13, 8, 3, 10, 5};
-    static final String[] NAMES = {"", "Easter Egg Hunt", "Summer Hunt", "Halloween Hunt", "", "Winter Hunt",
-            "Renaissance Hunt", "Spin Wheel Fiesta", "Land of the Livid Dead Marathon", "Raybeard's Treasure Hunt",
-            "Hell-O-Wheel", "Desert Kingdom Marathon", "Sakura Marathon", "Space Wheel", "", "", "RayWiz Marathon",
-            "Ice Age Wheel"};
+    /** Log labels: the costume of each event (names are in the game's texts; 10 seen in game). */
+    static final String[] NAMES = {"", "hunt (Teensy Bunny)", "hunt (Globox Summer)", "hunt (Globox Halloween)", "",
+            "hunt (Barbara Winter)", "hunt (Rayman Renaissance)", "wheel (Globox Glombrero)",
+            "marathon (Rayman Raybolt)", "hunt (Rayman Raybeard)", "wheel Expedition Rayhistorik (Barbarrrrr)",
+            "marathon (Globox Egyptian)", "marathon (Barbara Sakura)", "wheel (Rayman Spaceray)", "", "",
+            "marathon (Rayman RayWiz)", "wheel (Barbara IceAge)"};
 
     private SeasonalEvents() {
     }
@@ -82,9 +85,20 @@ final class SeasonalEvents {
         return new long[] {CALENDAR[slot], start, end, c.getTimeInMillis()};
     }
 
+    /**
+     * Event dates in UTC: RLC_SeasonalEventManager::getSeasonalEventTimeLeft(ToStart) compares them with
+     * GameServerModule::getCurrentServerTimeUTC, and DateTime::fromISO8601 drops the offset (a local
+     * "+01:00" date started the event one hour late). Incubator dates are the opposite (local).
+     */
+    static String utc(long millis) {
+        java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", java.util.Locale.US);
+        f.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
+        return f.format(new java.util.Date(millis)) + "+00:00";
+    }
+
     /** gameGlobals.versionTime of userprofile/meta: changes with each scheduled event. */
     static String versionTime() {
-        return Incubator.format(current()[1]);
+        return utc(current()[1]);
     }
 
     /** GET v1/gameglobals/getGameGlobals. */
@@ -92,9 +106,9 @@ final class SeasonalEvents {
         long[] ev = current();
         JSONObject params = new JSONObject();
         params.put("currentSeasonalEventID2", (int) ev[0]);
-        params.put("currentSeasonalEventStartingTime2", Incubator.format(ev[1]));
-        params.put("currentSeasonalEventEndingTime2", Incubator.format(ev[2]));
-        params.put("currentSeasonalEventCompleteEndingTime2", Incubator.format(ev[3]));
+        params.put("currentSeasonalEventStartingTime2", utc(ev[1]));
+        params.put("currentSeasonalEventEndingTime2", utc(ev[2]));
+        params.put("currentSeasonalEventCompleteEndingTime2", utc(ev[3]));
         // same shape as Ubisoft's overrides (gameglobals.isg.ckd): the template's fields + _CLASS_NAME
         params.put("_CLASS_NAME", "RLC_SeasonalEventManager_Template");
         JSONObject json = params;
