@@ -106,6 +106,7 @@ The title-screen login sometimes loops: the game deletes its UbiServices session
 | `memread.py` | Read and write the live game memory (root) |
 | `ipk.py list/get <bundle.ipk> …` | Extract files from the game's `.ipk` bundles (inside the OBB) |
 | `stringid.py <text>` | ITF StringID hash of a text or path |
+| `gameglobals.py [out.json]` | Decrypt Ubisoft's bundled game globals and extract their overrides |
 | `dump_ticket_weights.py` | Dump the lucky ticket weight tables from memory |
 
 ## Known limits and ideas
