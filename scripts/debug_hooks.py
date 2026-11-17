@@ -25,11 +25,16 @@ LOGGER_PRINTV = 0x18A9A68  # ITF::Logger::printV(this, fmt, va_list) single "ret
 # (x0..x2 = prio/tag/fmt, x6 = load base, always the 4th printf argument).
 HOOKS = [
     (0x1827CAC, "sub sp, sp, #0x50",
-     "Module::setState this=%p vt=%p state=%d base=%p",
-     "mov x3, x0\n    ldr x4, [x0]\n    mov w5, w1"),
+     "Module::setState this=%p vt=%p state=%d base=%p lr=%p",
+     "mov x3, x0\n    ldr x4, [x0]\n    mov w5, w1\n    mov x7, x30"),
     (0x1827FA8, "ldr w2, [x0, #0x2bc]",
      "Module::setIsDisconnecting this=%p vt=%p err0=%08x base=%p err1=%08x",
      "mov x3, x0\n    ldr x4, [x0]\n    ldr w5, [x1]\n    ldr w7, [x1, #4]"),
+    # Module::disconnect (vtable +0x28): state 4 -> 3 without an error, as in the title-screen
+    # login loop (UbiServicesModule_SDK connected then disconnected 1 ms later); lr = the caller
+    (0x1827F88, "ldr w2, [x0, #0x2bc]",
+     "Module::disconnect this=%p vt=%p state=%d base=%p lr=%p",
+     "mov x3, x0\n    ldr x4, [x0]\n    ldr w5, [x0, #0x2bc]\n    mov x7, x30"),
     # inventory: an elixir gain and the store credit it turns into (no credit = no stock found)
     (0x1785540, "sub sp, sp, #0x40",
      "InventoryManager::addElixirs type=%d amount=%d acq=%d base=%p",
