@@ -42,7 +42,7 @@ The release APK also embeds the game data (the OBB): `res/raw/game.properties` s
 
 ### Seasonal events in short
 
-The game ships with no event scheduled; Ubisoft used to override `enginedata/gameconfig/seasonaleventconfig.isg` through `gameglobals/getGameGlobals`. The server now sends 5 years of calendar in one answer: one override per event, each with a date condition, so the game picks the current event by itself at every launch. The answer is XXTEA-encrypted and base64-encoded, like Ubisoft's. Details, formats and keys are in DOSSIER_TECHNIQUE.md ("Événements saisonniers").
+The game ships with no event scheduled; Ubisoft used to override `enginedata/gameconfig/seasonaleventconfig.isg` through `gameglobals/getGameGlobals`. The server now sends 5 years of calendar in one answer: one override per event, each with a date condition, so the game picks the current event by itself at every launch. The answer is XXTEA-encrypted and base64-encoded, like Ubisoft's. A marathon is the daily challenge in event mode: during one, the challenge reward also gives 150 event currency (`Challenges.MARATHON_CURRENCY`). Details, formats and keys are in DOSSIER_TECHNIQUE.md ("Événements saisonniers").
 
 ## Building
 
@@ -108,6 +108,5 @@ A new seasonal calendar reaches the game only through `userprofile/meta` sent af
 
 ## Known limits and ideas
 
-- The marathon run itself is not fully tested yet (seasonal shop purchases are).
 - The title-screen login loops after a restart (see above); the game still logs in when the player taps Play.
 - Only tested on WSA, not yet on a real ARM64 phone.

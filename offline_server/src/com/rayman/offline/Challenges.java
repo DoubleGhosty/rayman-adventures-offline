@@ -26,7 +26,8 @@ import java.util.Iterator;
  *   setCollected      -> GameServerEmpty (rewards of the previous challenge taken)
  *
  * Offline there are no other players: the leaderboard holds the player alone, so a played challenge
- * always ends at rank 1/1. A new challenge starts every local day.
+ * always ends at rank 1/1. A new challenge starts every local day. During a marathon seasonal event the
+ * challenge is the event (the client shows it in event mode) and its reward includes event currency.
  */
 final class Challenges {
 
@@ -39,6 +40,15 @@ final class Challenges {
     // RLC_RewardType values (see Rewards)
     private static final int REWARD_GEMS = 1;
     private static final int REWARD_LUCKY_TICKET = 3;
+    private static final int REWARD_SEASONAL_CURRENCY = 16;
+
+    /**
+     * Event currency added to the reward during a marathon (our choice: Ubisoft's amounts per rank are
+     * lost). With one run a day it pays a costume (2500) over the 23 days, plus tickets (60) and eggs
+     * (350). The run itself also holds one currency pickup (client side, RLC_GS_Runner::
+     * spawnSeasonalEventActors).
+     */
+    static final int MARATHON_CURRENCY = 150;
 
     private Challenges() {
     }
@@ -118,7 +128,12 @@ final class Challenges {
     /** online::challengeRewardList, sorted by maxRank: the client picks the first tier with rank <= maxRank. */
     private static JSONArray rewardTiers() throws JSONException {
         JSONArray tiers = new JSONArray();
-        tiers.put(tier(1, 1, 0, reward(REWARD_GEMS, 25), reward(REWARD_LUCKY_TICKET, 1)));
+        if (SeasonalEvents.marathonRunning()) {
+            tiers.put(tier(1, 1, 0, reward(REWARD_SEASONAL_CURRENCY, MARATHON_CURRENCY), reward(REWARD_GEMS, 25),
+                    reward(REWARD_LUCKY_TICKET, 1)));
+        } else {
+            tiers.put(tier(1, 1, 0, reward(REWARD_GEMS, 25), reward(REWARD_LUCKY_TICKET, 1)));
+        }
         return tiers;
     }
 

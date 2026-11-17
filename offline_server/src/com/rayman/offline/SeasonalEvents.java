@@ -102,6 +102,24 @@ final class SeasonalEvents {
         return slot(c.get(Calendar.YEAR), slot);
     }
 
+    /** Marathon events: the daily challenge in event mode (RLC_ChallengeManager::isEndlessRunnerEventEnabled). */
+    static final int[] MARATHONS = {8, 11, 12, 16};
+
+    /** True while a marathon event runs (not during its "last chance" days). */
+    static boolean marathonRunning() {
+        long[] ev = current();
+        long now = System.currentTimeMillis();
+        if (now < ev[1] || now >= ev[2]) {
+            return false;
+        }
+        for (int id : MARATHONS) {
+            if (id == ev[0]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Event dates in UTC: RLC_SeasonalEventManager::getSeasonalEventTimeLeft(ToStart) compares them with
      * GameServerModule::getCurrentServerTimeUTC, and DateTime::fromISO8601 drops the offset (a local
