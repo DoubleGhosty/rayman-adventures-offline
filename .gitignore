@@ -28,3 +28,4 @@ screenshots/*
 # Superseded scripts of the first (Gemini) phase, with local paths
 patch_purchase.py
 patch_ssl.py
+!screenshots/readme_*.jpg
