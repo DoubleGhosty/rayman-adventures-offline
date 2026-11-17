@@ -211,6 +211,9 @@ final class RlcApi {
         if (module.equals("gameglobals") && action.equals("getMiniEventsStatus")) {
             return MiniEvents.status();
         }
+        if (module.equals("gameglobals") && action.equals("getGameGlobals")) {
+            return SeasonalEvents.gameGlobals();      // seasonal event calendar (template override)
+        }
         if (module.equals("storepacks") && action.equals("packs")) {
             // getStorePacksResult {packs[RLC_StorePacksLocInfo]}: localized texts of paid packs, none offline
             JSONObject out = new JSONObject();
@@ -256,7 +259,7 @@ final class RlcApi {
      */
     private static JSONObject meta() throws JSONException {
         JSONObject gg = new JSONObject();
-        gg.put("versionTime", "0000-00-00T00:00:00+00:00");
+        gg.put("versionTime", SeasonalEvents.versionTime());   // a new value makes the game fetch getGameGlobals
         gg.put("branch", 0);
         org.json.JSONArray slots = new org.json.JSONArray();
         for (int i = 0; i < SAVE_SLOTS; i++) {

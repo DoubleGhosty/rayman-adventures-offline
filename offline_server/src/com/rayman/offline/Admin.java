@@ -17,6 +17,8 @@ import java.nio.charset.Charset;
  *   curl "http://127.0.0.1:18080/offline/admin/forceTicket?type=9&e0=2" (next ticket = rare egg)
  *   curl "http://127.0.0.1:18080/offline/admin/miniEvent?name=Mini%20Marathon&hours=2" (runs a mini
  *                                                                 event now; name=auto: back to the schedule)
+ *   curl "http://127.0.0.1:18080/offline/admin/seasonalEvent?id=3&days=7" (runs seasonal event 3 now; id=0:
+ *                                                                 back to the calendar, SeasonalEvents.java)
  *   curl http://127.0.0.1:18080/offline/admin/ageChallenges      (moves stored scores one day back,
  *                                                                 to test the reward collection)
  * (the server only listens on the device loopback, so nothing else can reach it).
@@ -77,6 +79,11 @@ final class Admin {
                 String name = java.net.URLDecoder.decode(param(path, "name", "auto"), "UTF-8");
                 double hours = Double.parseDouble(param(path, "hours", "1"));
                 return MiniEvents.force(name, hours).toString(2).getBytes(UTF8);
+            }
+            if (path.startsWith("/offline/admin/seasonalEvent")) {
+                int id = Integer.parseInt(param(path, "id", "0"));
+                double days = Double.parseDouble(param(path, "days", "7"));
+                return SeasonalEvents.force(id, days).toString(2).getBytes(UTF8);
             }
             if (path.startsWith("/offline/admin/ageChallenges")) {
                 return Challenges.ageDays().toString(2).getBytes(UTF8);
