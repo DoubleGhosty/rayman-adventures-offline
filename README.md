@@ -4,15 +4,12 @@
 
 ## 📥 Télécharger et installer
 
-Dans la page **Releases** du dépôt, télécharger les deux fichiers :
-- `RaymanAdventures_Offline.apk` : le jeu patché ;
-- `main.2086.com.ubisoft.raymanadventures.obb` : les données du jeu (≈ 420 Mo).
-
-Puis :
+Dans la page **Releases** du dépôt, télécharger `RaymanAdventures_Offline.apk` (≈ 445 Mo, données du jeu comprises), puis :
 1. Désinstaller la version Ubisoft si elle est installée (signature différente).
 2. Installer `RaymanAdventures_Offline.apk`.
-3. Copier le fichier `.obb` dans `Android/obb/com.ubisoft.raymanadventures/` (créer le dossier).
-4. Lancer le jeu. Aucune connexion, aucun compte, aucun root nécessaire.
+3. Lancer le jeu. Au premier lancement, il installe lui-même ses données (l'OBB) dans `Android/obb/com.ubisoft.raymanadventures/` : quelques secondes d'écran noir. Aucune connexion, aucun compte, aucun root nécessaire.
+
+Le jeu occupe environ 900 Mo une fois installé (l'APK garde une copie des données). Pour un APK léger, `python scripts/repackage_apk.py --no-obb` puis copier soi-même le `.obb` dans le dossier ci-dessus.
 
 Testé sur Windows Subsystem for Android (ARM64 émulé). Une manette (Xbox, etc.) est reconnue si elle est connectée **avant** de lancer le jeu.
 
@@ -25,7 +22,7 @@ Les fichiers d'Ubisoft ne sont pas dans le dépôt. Pour recompiler, placer :
 - l'APK d'origine 4.0.0.2086 dans `apk/base_original.apk` ;
 - sa bibliothèque `lib/arm64-v8a/libuaf.so` dans `binaries/libuaf_original.so`.
 
-Outils : Python 3 (`keystone-engine`, `capstone`), Android SDK (build-tools 34, platform 34), JDK (celui d'Android Studio). Ensuite les trois étapes ci-dessous (`build_libuaf_offline.py`, `build_offline_server.py`, `repackage_apk.py`). La clé de signature (`apk/offline_testkey.jks`) est créée au premier build ; garder la même clé pour pouvoir mettre à jour le jeu sans perdre la partie.
+Outils : Python 3 (`keystone-engine`, `capstone`), Android SDK (build-tools 34, platform 34), JDK (celui d'Android Studio). Placer aussi `main.2086.com.ubisoft.raymanadventures.obb` dans `apk/` (intégré à l'APK par défaut). Ensuite les trois étapes ci-dessous (`build_libuaf_offline.py`, `build_offline_server.py`, `repackage_apk.py`). La clé de signature (`apk/offline_testkey.jks`) est créée au premier build ; garder la même clé pour pouvoir mettre à jour le jeu sans perdre la partie.
 
 ---
 

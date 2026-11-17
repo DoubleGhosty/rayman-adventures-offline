@@ -40,6 +40,14 @@ if not os.path.exists(PATCHED_SO):
 sys.path.insert(0, BASE_DIR)
 from patch_manifest import patch_manifest
 
+# Game data (OBB) embedded in the APK by default: one file to install. --no-obb builds the light
+# APK that needs the separate main.2086.com.ubisoft.raymanadventures.obb in Android/obb/.
+OBB_FILE = os.path.join(APK_DIR, 'main.2086.com.ubisoft.raymanadventures.obb')
+EMBED_OBB = "--no-obb" not in sys.argv
+if EMBED_OBB and not os.path.exists(OBB_FILE):
+    print(f"Error: OBB not found at {OBB_FILE} (or build with --no-obb)")
+    sys.exit(1)
+
 SERVER_DEX = os.path.join(ROOT_DIR, 'offline_server', 'build', 'classes.dex')
 SERVER_ASSETS = os.path.join(ROOT_DIR, 'offline_server', 'assets')
 if not os.path.exists(SERVER_DEX):
@@ -60,7 +68,20 @@ with zipfile.ZipFile(BASE_APK, 'r') as zin:
             if item.filename == "AndroidManifest.xml":
                 data = patch_manifest(data)
                 print("  AndroidManifest.xml: OfflineServerProvider declared")
+            if item.filename == "res/raw/game.properties" and EMBED_OBB:
+                # Ubisoft's own "OBB in the APK" mode: InstallActivity.launchGameInstaller copies
+                # every assets/*.obb into getObbDir() when the OBB is missing, then starts the game.
+                old = b"package.main.Location = SERVER"
+                assert old in data, "game.properties: package.main.Location not found"
+                data = data.replace(old, b"package.main.Location = ASSET")
+                print("  res/raw/game.properties: package.main.Location = ASSET")
             zout.writestr(item, data)
+
+        if EMBED_OBB:
+            # Stored (not deflated): the OBB is a zip of already packed bundles, and a stored
+            # asset is copied at disk speed on the first launch.
+            zout.write(OBB_FILE, "assets/" + os.path.basename(OBB_FILE), compress_type=zipfile.ZIP_STORED)
+            print(f"  assets/{os.path.basename(OBB_FILE)}: game data embedded ({os.path.getsize(OBB_FILE)} bytes)")
 
         orig_info = zin.getinfo("lib/arm64-v8a/libuaf.so")
         compress_type = orig_info.compress_type
