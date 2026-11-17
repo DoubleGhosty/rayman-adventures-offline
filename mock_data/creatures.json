@@ -1,0 +1,2282 @@
+[
+{
+"id": 1220545346,
+"name": "Magnet_Balloon_5",
+"family": 1,
+"rarity": 0
+},
+{
+"id": 4108143277,
+"name": "Magnet_Balloon_4",
+"family": 1,
+"rarity": 0
+},
+{
+"id": 819309481,
+"name": "Magnet_Balloon_3",
+"family": 1,
+"rarity": 1
+},
+{
+"id": 3020882873,
+"name": "Magnet_Balloon_2",
+"family": 1,
+"rarity": 2
+},
+{
+"id": 496173684,
+"name": "Magnet_Balloon_Q",
+"family": 1,
+"rarity": 5
+},
+{
+"id": 876088634,
+"name": "Magnet_Banana_7",
+"family": 2,
+"rarity": 0
+},
+{
+"id": 399982812,
+"name": "Magnet_Banana_5",
+"family": 2,
+"rarity": 0
+},
+{
+"id": 2713803369,
+"name": "Magnet_Banana_6",
+"family": 2,
+"rarity": 0
+},
+{
+"id": 4238763303,
+"name": "Magnet_Banana_4",
+"family": 2,
+"rarity": 1
+},
+{
+"id": 2434539852,
+"name": "Magnet_Banana_3",
+"family": 2,
+"rarity": 1
+},
+{
+"id": 2827493260,
+"name": "Magnet_Banana_2",
+"family": 2,
+"rarity": 2
+},
+{
+"id": 1453898543,
+"name": "Magnet_Banana_Q",
+"family": 2,
+"rarity": 5
+},
+{
+"id": 925739976,
+"name": "Magnet_Quince_4",
+"family": 4,
+"rarity": 0
+},
+{
+"id": 3446401051,
+"name": "Magnet_Quince_5",
+"family": 4,
+"rarity": 0
+},
+{
+"id": 1639252164,
+"name": "Magnet_Quince_3",
+"family": 4,
+"rarity": 1
+},
+{
+"id": 2740307431,
+"name": "Magnet_Quince_2",
+"family": 4,
+"rarity": 2
+},
+{
+"id": 546951067,
+"name": "Magnet_Quince_Q",
+"family": 4,
+"rarity": 5
+},
+{
+"id": 592153490,
+"name": "Magnet_Strawberry_6",
+"family": 5,
+"rarity": 0
+},
+{
+"id": 1832567127,
+"name": "Magnet_Strawberry_5",
+"family": 5,
+"rarity": 0
+},
+{
+"id": 4119710306,
+"name": "Magnet_Strawberry_4",
+"family": 5,
+"rarity": 1
+},
+{
+"id": 2976303014,
+"name": "Magnet_Strawberry_3",
+"family": 5,
+"rarity": 1
+},
+{
+"id": 3984107107,
+"name": "Magnet_Strawberry_2",
+"family": 5,
+"rarity": 2
+},
+{
+"id": 958289257,
+"name": "Magnet_Strawberry_Q",
+"family": 5,
+"rarity": 5
+},
+{
+"id": 1695697927,
+"name": "Magnet_Tapiblue_4",
+"family": 6,
+"rarity": 0
+},
+{
+"id": 247822195,
+"name": "Magnet_Tapiblue_6",
+"family": 6,
+"rarity": 0
+},
+{
+"id": 349328530,
+"name": "Magnet_Tapiblue_5",
+"family": 6,
+"rarity": 1
+},
+{
+"id": 2424519297,
+"name": "Magnet_Tapiblue_3",
+"family": 6,
+"rarity": 1
+},
+{
+"id": 742051283,
+"name": "Magnet_Tapiblue_2",
+"family": 6,
+"rarity": 2
+},
+{
+"id": 1011978969,
+"name": "Magnet_Tapiblue_Q",
+"family": 6,
+"rarity": 5
+},
+{
+"id": 1378377404,
+"name": "Magnet_Watermelon_7",
+"family": 7,
+"rarity": 0
+},
+{
+"id": 3094012216,
+"name": "Magnet_Watermelon_6",
+"family": 7,
+"rarity": 0
+},
+{
+"id": 3256469464,
+"name": "Magnet_Watermelon_5",
+"family": 7,
+"rarity": 0
+},
+{
+"id": 1003349640,
+"name": "Magnet_Watermelon_4",
+"family": 7,
+"rarity": 1
+},
+{
+"id": 126307,
+"name": "Magnet_Watermelon_3",
+"family": 7,
+"rarity": 1
+},
+{
+"id": 3426785058,
+"name": "Magnet_Watermelon_2",
+"family": 7,
+"rarity": 2
+},
+{
+"id": 560360381,
+"name": "Magnet_Watermelon_Q",
+"family": 7,
+"rarity": 5
+},
+{
+"id": 413857686,
+"name": "Radar_Apricot_4",
+"family": 8,
+"rarity": 0
+},
+{
+"id": 1251657756,
+"name": "Radar_Apricot_5",
+"family": 8,
+"rarity": 0
+},
+{
+"id": 526160144,
+"name": "Radar_Apricot_3",
+"family": 8,
+"rarity": 1
+},
+{
+"id": 3313392977,
+"name": "Radar_Apricot_2",
+"family": 8,
+"rarity": 2
+},
+{
+"id": 3210147069,
+"name": "Radar_Apricot_Q",
+"family": 8,
+"rarity": 5
+},
+{
+"id": 1580775996,
+"name": "Radar_Citron_5",
+"family": 9,
+"rarity": 0
+},
+{
+"id": 89066896,
+"name": "Radar_Citron_4",
+"family": 9,
+"rarity": 0
+},
+{
+"id": 2176065667,
+"name": "Radar_Citron_3",
+"family": 9,
+"rarity": 1
+},
+{
+"id": 2329840942,
+"name": "Radar_Citron_2",
+"family": 9,
+"rarity": 2
+},
+{
+"id": 738956081,
+"name": "Radar_Citron_Q",
+"family": 9,
+"rarity": 5
+},
+{
+"id": 1259403929,
+"name": "Radar_Fluffy_3",
+"family": 10,
+"rarity": 0
+},
+{
+"id": 986693373,
+"name": "Radar_Fluffy_2",
+"family": 10,
+"rarity": 2
+},
+{
+"id": 2582585910,
+"name": "Radar_Fluffy_Q",
+"family": 10,
+"rarity": 5
+},
+{
+"id": 2961326767,
+"name": "Radar_FuzzBall_5",
+"family": 11,
+"rarity": 0
+},
+{
+"id": 2637807872,
+"name": "Radar_FuzzBall_4",
+"family": 11,
+"rarity": 0
+},
+{
+"id": 3291023657,
+"name": "Radar_FuzzBall_3",
+"family": 11,
+"rarity": 1
+},
+{
+"id": 559767489,
+"name": "Radar_FuzzBall_2",
+"family": 11,
+"rarity": 2
+},
+{
+"id": 3643204001,
+"name": "Radar_FuzzBall_Q",
+"family": 11,
+"rarity": 5
+},
+{
+"id": 43072231,
+"name": "Radar_Leek_4",
+"family": 12,
+"rarity": 0
+},
+{
+"id": 475034472,
+"name": "Radar_Leek_3",
+"family": 12,
+"rarity": 1
+},
+{
+"id": 1568105720,
+"name": "Radar_Leek_2",
+"family": 12,
+"rarity": 2
+},
+{
+"id": 2287520995,
+"name": "Radar_Leek_Q",
+"family": 12,
+"rarity": 5
+},
+{
+"id": 1866180626,
+"name": "Radar_Petrol_4",
+"family": 13,
+"rarity": 0
+},
+{
+"id": 924532781,
+"name": "Radar_Petrol_3",
+"family": 13,
+"rarity": 1
+},
+{
+"id": 2786870851,
+"name": "Radar_Petrol_2",
+"family": 13,
+"rarity": 2
+},
+{
+"id": 3495952472,
+"name": "Radar_Petrol_Q",
+"family": 13,
+"rarity": 5
+},
+{
+"id": 4151873461,
+"name": "Radar_Plum_6",
+"family": 14,
+"rarity": 0
+},
+{
+"id": 1467896541,
+"name": "Radar_Plum_5",
+"family": 14,
+"rarity": 0
+},
+{
+"id": 137187525,
+"name": "Radar_Plum_4",
+"family": 14,
+"rarity": 1
+},
+{
+"id": 185538405,
+"name": "Radar_Plum_3",
+"family": 14,
+"rarity": 1
+},
+{
+"id": 3275219746,
+"name": "Radar_Plum_2",
+"family": 14,
+"rarity": 2
+},
+{
+"id": 1032800489,
+"name": "Radar_Plum_Q",
+"family": 14,
+"rarity": 5
+},
+{
+"id": 2991242727,
+"name": "Radar_Rubber_5",
+"family": 15,
+"rarity": 0
+},
+{
+"id": 2613617210,
+"name": "Radar_Rubber_4",
+"family": 15,
+"rarity": 0
+},
+{
+"id": 4198530577,
+"name": "Radar_Rubber_3",
+"family": 15,
+"rarity": 1
+},
+{
+"id": 3223638226,
+"name": "Radar_Rubber_2",
+"family": 15,
+"rarity": 2
+},
+{
+"id": 392638512,
+"name": "Radar_Rubber_Q",
+"family": 15,
+"rarity": 5
+},
+{
+"id": 2226912873,
+"name": "Shield_Cactus_6",
+"family": 16,
+"rarity": 0
+},
+{
+"id": 1496225689,
+"name": "Shield_Cactus_4",
+"family": 16,
+"rarity": 1
+},
+{
+"id": 1908414953,
+"name": "Shield_Cactus_5",
+"family": 16,
+"rarity": 1
+},
+{
+"id": 3817890864,
+"name": "Shield_Cactus_3",
+"family": 16,
+"rarity": 2
+},
+{
+"id": 2791215967,
+"name": "Shield_Cactus_2",
+"family": 16,
+"rarity": 2
+},
+{
+"id": 319320345,
+"name": "Shield_Cactus_Q",
+"family": 16,
+"rarity": 5
+},
+{
+"id": 4119802976,
+"name": "Shield_Charcoal_3",
+"family": 17,
+"rarity": 0
+},
+{
+"id": 3999934270,
+"name": "Shield_Charcoal_2",
+"family": 17,
+"rarity": 1
+},
+{
+"id": 2044079526,
+"name": "Shield_Charcoal_Q",
+"family": 17,
+"rarity": 5
+},
+{
+"id": 2644658709,
+"name": "Shield_Gum_2",
+"family": 18,
+"rarity": 0
+},
+{
+"id": 3966836905,
+"name": "Shield_Gum_3",
+"family": 18,
+"rarity": 0
+},
+{
+"id": 2699342839,
+"name": "Shield_Gum_4",
+"family": 18,
+"rarity": 0
+},
+{
+"id": 1699291593,
+"name": "Shield_Gum_Q",
+"family": 18,
+"rarity": 5
+},
+{
+"id": 2850725797,
+"name": "Shield_Jelly_6",
+"family": 19,
+"rarity": 0
+},
+{
+"id": 2666993846,
+"name": "Shield_Jelly_7",
+"family": 19,
+"rarity": 0
+},
+{
+"id": 3780389703,
+"name": "Shield_Jelly_8",
+"family": 19,
+"rarity": 0
+},
+{
+"id": 4126453506,
+"name": "Shield_Jelly_3",
+"family": 19,
+"rarity": 1
+},
+{
+"id": 450211991,
+"name": "Shield_Jelly_5",
+"family": 19,
+"rarity": 1
+},
+{
+"id": 3414786979,
+"name": "Shield_Jelly_4",
+"family": 19,
+"rarity": 1
+},
+{
+"id": 1264191296,
+"name": "Shield_Jelly_2",
+"family": 19,
+"rarity": 2
+},
+{
+"id": 2493874509,
+"name": "Shield_Jelly_Q",
+"family": 19,
+"rarity": 5
+},
+{
+"id": 2729478989,
+"name": "Shield_Metal_2",
+"family": 20,
+"rarity": 2
+},
+{
+"id": 1620367540,
+"name": "Shield_Metal_3",
+"family": 20,
+"rarity": 2
+},
+{
+"id": 2547318879,
+"name": "Shield_Metal_4",
+"family": 20,
+"rarity": 2
+},
+{
+"id": 3947434501,
+"name": "Shield_Metal_5",
+"family": 20,
+"rarity": 2
+},
+{
+"id": 3346279942,
+"name": "Shield_Metal_Q",
+"family": 20,
+"rarity": 5
+},
+{
+"id": 3182014827,
+"name": "Shield_Mop_6",
+"family": 21,
+"rarity": 0
+},
+{
+"id": 1662830782,
+"name": "Shield_Mop_5",
+"family": 21,
+"rarity": 0
+},
+{
+"id": 10452400,
+"name": "Shield_Mop_3",
+"family": 21,
+"rarity": 1
+},
+{
+"id": 3121476135,
+"name": "Shield_Mop_4",
+"family": 21,
+"rarity": 1
+},
+{
+"id": 4120395911,
+"name": "Shield_Mop_2",
+"family": 21,
+"rarity": 2
+},
+{
+"id": 137626483,
+"name": "Shield_Mop_Q",
+"family": 21,
+"rarity": 5
+},
+{
+"id": 74513612,
+"name": "Shield_RedPunk_5",
+"family": 22,
+"rarity": 0
+},
+{
+"id": 3394621618,
+"name": "Shield_RedPunk_4",
+"family": 22,
+"rarity": 0
+},
+{
+"id": 26023763,
+"name": "Shield_RedPunk_3",
+"family": 22,
+"rarity": 1
+},
+{
+"id": 2814408269,
+"name": "Shield_RedPunk_2",
+"family": 22,
+"rarity": 2
+},
+{
+"id": 1257042305,
+"name": "Shield_RedPunk_Q",
+"family": 22,
+"rarity": 5
+},
+{
+"id": 385494822,
+"name": "Shield_DarkFur_8",
+"family": 23,
+"rarity": 1
+},
+{
+"id": 786209753,
+"name": "Shield_DarkFur_6",
+"family": 23,
+"rarity": 1
+},
+{
+"id": 583951295,
+"name": "Shield_DarkFur_7",
+"family": 23,
+"rarity": 1
+},
+{
+"id": 2752737222,
+"name": "Shield_DarkFur_2",
+"family": 23,
+"rarity": 2
+},
+{
+"id": 1590610407,
+"name": "Shield_DarkFur_3",
+"family": 23,
+"rarity": 2
+},
+{
+"id": 2660948415,
+"name": "Shield_DarkFur_4",
+"family": 23,
+"rarity": 2
+},
+{
+"id": 4013396453,
+"name": "Shield_DarkFur_5",
+"family": 23,
+"rarity": 2
+},
+{
+"id": 1188285869,
+"name": "Shield_DarkFur_Q",
+"family": 23,
+"rarity": 5
+},
+{
+"id": 1426981303,
+"name": "Radar_Cauliflower_7",
+"family": 24,
+"rarity": 0
+},
+{
+"id": 2432705715,
+"name": "Radar_Cauliflower_8",
+"family": 24,
+"rarity": 0
+},
+{
+"id": 3076270254,
+"name": "Radar_Cauliflower_5",
+"family": 24,
+"rarity": 1
+},
+{
+"id": 907506805,
+"name": "Radar_Cauliflower_6",
+"family": 24,
+"rarity": 1
+},
+{
+"id": 2748485388,
+"name": "Radar_Cauliflower_3",
+"family": 24,
+"rarity": 2
+},
+{
+"id": 1040199134,
+"name": "Radar_Cauliflower_2",
+"family": 24,
+"rarity": 2
+},
+{
+"id": 1128701379,
+"name": "Radar_Cauliflower_4",
+"family": 24,
+"rarity": 2
+},
+{
+"id": 727563444,
+"name": "Radar_Cauliflower_Q",
+"family": 24,
+"rarity": 5
+},
+{
+"id": 2561814349,
+"name": "Radar_Rose_4",
+"family": 25,
+"rarity": 0
+},
+{
+"id": 2468605031,
+"name": "Radar_Rose_5",
+"family": 25,
+"rarity": 0
+},
+{
+"id": 2872938878,
+"name": "Radar_Rose_6",
+"family": 25,
+"rarity": 0
+},
+{
+"id": 2114861330,
+"name": "Radar_Rose_3",
+"family": 25,
+"rarity": 1
+},
+{
+"id": 2577135075,
+"name": "Radar_Rose_2",
+"family": 25,
+"rarity": 2
+},
+{
+"id": 1457634479,
+"name": "Radar_Rose_Q",
+"family": 25,
+"rarity": 5
+},
+{
+"id": 1113921151,
+"name": "Shield_Chocolate_5",
+"family": 26,
+"rarity": 1
+},
+{
+"id": 272357096,
+"name": "Shield_Chocolate_6",
+"family": 26,
+"rarity": 1
+},
+{
+"id": 1735797975,
+"name": "Shield_Chocolate_4",
+"family": 26,
+"rarity": 2
+},
+{
+"id": 106720969,
+"name": "Shield_Chocolate_3",
+"family": 26,
+"rarity": 2
+},
+{
+"id": 2789793606,
+"name": "Shield_Chocolate_2",
+"family": 26,
+"rarity": 2
+},
+{
+"id": 4082869398,
+"name": "Shield_Chocolate_Q",
+"family": 26,
+"rarity": 5
+},
+{
+"id": 333449965,
+"name": "Magnet_Parrot_6",
+"family": 27,
+"rarity": 0
+},
+{
+"id": 1355777967,
+"name": "Magnet_Parrot_5",
+"family": 27,
+"rarity": 0
+},
+{
+"id": 780741038,
+"name": "Magnet_Parrot_4",
+"family": 27,
+"rarity": 0
+},
+{
+"id": 2825940900,
+"name": "Magnet_Parrot_3",
+"family": 27,
+"rarity": 1
+},
+{
+"id": 3336664993,
+"name": "Magnet_Parrot_2",
+"family": 27,
+"rarity": 2
+},
+{
+"id": 2186284368,
+"name": "Magnet_Parrot_Q",
+"family": 27,
+"rarity": 5
+},
+{
+"id": 3834142569,
+"name": "Shield_Frog_6",
+"family": 28,
+"rarity": 0
+},
+{
+"id": 844772989,
+"name": "Shield_Frog_5",
+"family": 28,
+"rarity": 1
+},
+{
+"id": 3868227505,
+"name": "Shield_Frog_4",
+"family": 28,
+"rarity": 1
+},
+{
+"id": 1628026093,
+"name": "Shield_Frog_2",
+"family": 28,
+"rarity": 2
+},
+{
+"id": 3617503188,
+"name": "Shield_Frog_3",
+"family": 28,
+"rarity": 2
+},
+{
+"id": 2503962093,
+"name": "Shield_Frog_Q",
+"family": 28,
+"rarity": 5
+},
+{
+"id": 3485568067,
+"name": "Magnet_Candy_7",
+"family": 29,
+"rarity": 0
+},
+{
+"id": 2241652614,
+"name": "Magnet_Candy_8",
+"family": 29,
+"rarity": 0
+},
+{
+"id": 2355749390,
+"name": "Magnet_Candy_6",
+"family": 29,
+"rarity": 1
+},
+{
+"id": 3702017422,
+"name": "Magnet_Candy_5",
+"family": 29,
+"rarity": 1
+},
+{
+"id": 4157606558,
+"name": "Magnet_Candy_4",
+"family": 29,
+"rarity": 1
+},
+{
+"id": 2633357886,
+"name": "Magnet_Candy_2",
+"family": 29,
+"rarity": 2
+},
+{
+"id": 1182577321,
+"name": "Magnet_Candy_3",
+"family": 29,
+"rarity": 2
+},
+{
+"id": 123425161,
+"name": "Magnet_Candy_Q",
+"family": 29,
+"rarity": 5
+},
+{
+"id": 2004191397,
+"name": "Magnet_Sushi_6",
+"family": 30,
+"rarity": 0
+},
+{
+"id": 3895414982,
+"name": "Magnet_Sushi_5",
+"family": 30,
+"rarity": 0
+},
+{
+"id": 4168539165,
+"name": "Magnet_Sushi_7",
+"family": 30,
+"rarity": 0
+},
+{
+"id": 1685524282,
+"name": "Magnet_Sushi_8",
+"family": 30,
+"rarity": 0
+},
+{
+"id": 950828548,
+"name": "Magnet_Sushi_4",
+"family": 30,
+"rarity": 1
+},
+{
+"id": 921030230,
+"name": "Magnet_Sushi_3",
+"family": 30,
+"rarity": 1
+},
+{
+"id": 615830366,
+"name": "Magnet_Sushi_2",
+"family": 30,
+"rarity": 2
+},
+{
+"id": 141160656,
+"name": "Magnet_Sushi_Q",
+"family": 30,
+"rarity": 5
+},
+{
+"id": 2387375798,
+"name": "Radar_Tropical_4",
+"family": 31,
+"rarity": 0
+},
+{
+"id": 1807699554,
+"name": "Radar_Tropical_5",
+"family": 31,
+"rarity": 0
+},
+{
+"id": 368223882,
+"name": "Radar_Tropical_6",
+"family": 31,
+"rarity": 0
+},
+{
+"id": 909796556,
+"name": "Radar_Tropical_3",
+"family": 31,
+"rarity": 1
+},
+{
+"id": 1176051222,
+"name": "Radar_Tropical_2",
+"family": 31,
+"rarity": 2
+},
+{
+"id": 3500247736,
+"name": "Radar_Tropical_Q",
+"family": 31,
+"rarity": 5
+},
+{
+"id": 4246331684,
+"name": "Magnet_MagSummer_6",
+"family": 32,
+"rarity": 0
+},
+{
+"id": 228250869,
+"name": "Magnet_MagSummer_5",
+"family": 32,
+"rarity": 0
+},
+{
+"id": 2785309951,
+"name": "Magnet_MagSummer_4",
+"family": 32,
+"rarity": 1
+},
+{
+"id": 3734805818,
+"name": "Magnet_MagSummer_3",
+"family": 32,
+"rarity": 1
+},
+{
+"id": 3942359560,
+"name": "Magnet_MagSummer_2",
+"family": 32,
+"rarity": 2
+},
+{
+"id": 3145153075,
+"name": "Magnet_MagSummer_Q",
+"family": 32,
+"rarity": 5
+},
+{
+"id": 1307058433,
+"name": "Shield_InvSummer_3",
+"family": 33,
+"rarity": 2
+},
+{
+"id": 1903016575,
+"name": "Shield_InvSummer_2",
+"family": 33,
+"rarity": 2
+},
+{
+"id": 4210984239,
+"name": "Shield_InvSummer_4",
+"family": 33,
+"rarity": 2
+},
+{
+"id": 3955203778,
+"name": "Shield_InvSummer_Q",
+"family": 33,
+"rarity": 5
+},
+{
+"id": 1157873850,
+"name": "Radar_Peacock_8",
+"family": 34,
+"rarity": 0
+},
+{
+"id": 3705349355,
+"name": "Radar_Peacock_7",
+"family": 34,
+"rarity": 0
+},
+{
+"id": 422059827,
+"name": "Radar_Peacock_5",
+"family": 34,
+"rarity": 1
+},
+{
+"id": 1091254950,
+"name": "Radar_Peacock_6",
+"family": 34,
+"rarity": 1
+},
+{
+"id": 3318856792,
+"name": "Radar_Peacock_4",
+"family": 34,
+"rarity": 2
+},
+{
+"id": 1444837265,
+"name": "Radar_Peacock_2",
+"family": 34,
+"rarity": 2
+},
+{
+"id": 3641896763,
+"name": "Radar_Peacock_3",
+"family": 34,
+"rarity": 2
+},
+{
+"id": 3199520575,
+"name": "Radar_Peacock_Q",
+"family": 34,
+"rarity": 5
+},
+{
+"id": 2063578305,
+"name": "Magnet_Fig_7",
+"family": 35,
+"rarity": 0
+},
+{
+"id": 1790598679,
+"name": "Magnet_Fig_8",
+"family": 35,
+"rarity": 0
+},
+{
+"id": 3675022459,
+"name": "Magnet_Fig_5",
+"family": 35,
+"rarity": 1
+},
+{
+"id": 814205039,
+"name": "Magnet_Fig_6",
+"family": 35,
+"rarity": 1
+},
+{
+"id": 4225815912,
+"name": "Magnet_Fig_2",
+"family": 35,
+"rarity": 2
+},
+{
+"id": 2044233560,
+"name": "Magnet_Fig_4",
+"family": 35,
+"rarity": 2
+},
+{
+"id": 1565034102,
+"name": "Magnet_Fig_3",
+"family": 35,
+"rarity": 2
+},
+{
+"id": 289251070,
+"name": "Magnet_Fig_Q",
+"family": 35,
+"rarity": 5
+},
+{
+"id": 3889128278,
+"name": "Radar_Cat_8",
+"family": 38,
+"rarity": 0
+},
+{
+"id": 2358184783,
+"name": "Radar_Cat_7",
+"family": 38,
+"rarity": 0
+},
+{
+"id": 2434166338,
+"name": "Radar_Cat_6",
+"family": 38,
+"rarity": 1
+},
+{
+"id": 2693673333,
+"name": "Radar_Cat_5",
+"family": 38,
+"rarity": 1
+},
+{
+"id": 2015154193,
+"name": "Radar_Cat_3",
+"family": 38,
+"rarity": 2
+},
+{
+"id": 3896291361,
+"name": "Radar_Cat_4",
+"family": 38,
+"rarity": 2
+},
+{
+"id": 123149529,
+"name": "Radar_Cat_2",
+"family": 38,
+"rarity": 2
+},
+{
+"id": 2529560235,
+"name": "Radar_Cat_Q",
+"family": 38,
+"rarity": 5
+},
+{
+"id": 2285881305,
+"name": "Shield_Mummy_8",
+"family": 39,
+"rarity": 0
+},
+{
+"id": 3885901680,
+"name": "Shield_Mummy_6",
+"family": 39,
+"rarity": 0
+},
+{
+"id": 1854655380,
+"name": "Shield_Mummy_5",
+"family": 39,
+"rarity": 0
+},
+{
+"id": 271214892,
+"name": "Shield_Mummy_7",
+"family": 39,
+"rarity": 0
+},
+{
+"id": 4266952017,
+"name": "Shield_Mummy_4",
+"family": 39,
+"rarity": 1
+},
+{
+"id": 2710762752,
+"name": "Shield_Mummy_3",
+"family": 39,
+"rarity": 1
+},
+{
+"id": 1373586328,
+"name": "Shield_Mummy_2",
+"family": 39,
+"rarity": 2
+},
+{
+"id": 1118351154,
+"name": "Shield_Mummy_Q",
+"family": 39,
+"rarity": 5
+},
+{
+"id": 1422336743,
+"name": "Magnet_WooliesWinter_5",
+"family": 40,
+"rarity": 1
+},
+{
+"id": 2830848310,
+"name": "Magnet_WooliesWinter_4",
+"family": 40,
+"rarity": 1
+},
+{
+"id": 758376963,
+"name": "Magnet_WooliesWinter_6",
+"family": 40,
+"rarity": 1
+},
+{
+"id": 4262614657,
+"name": "Magnet_WooliesWinter_3",
+"family": 40,
+"rarity": 2
+},
+{
+"id": 1884893304,
+"name": "Magnet_WooliesWinter_2",
+"family": 40,
+"rarity": 2
+},
+{
+"id": 2042051352,
+"name": "Magnet_WooliesWinter_Q",
+"family": 40,
+"rarity": 5
+},
+{
+"id": 786789318,
+"name": "Magnet_FrosteesWinter_4",
+"family": 41,
+"rarity": 1
+},
+{
+"id": 533958662,
+"name": "Magnet_FrosteesWinter_5",
+"family": 41,
+"rarity": 1
+},
+{
+"id": 582532216,
+"name": "Magnet_FrosteesWinter_6",
+"family": 41,
+"rarity": 1
+},
+{
+"id": 3979679637,
+"name": "Magnet_FrosteesWinter_3",
+"family": 41,
+"rarity": 2
+},
+{
+"id": 2559273275,
+"name": "Magnet_FrosteesWinter_2",
+"family": 41,
+"rarity": 2
+},
+{
+"id": 2419880328,
+"name": "Magnet_FrosteesWinter_Q",
+"family": 41,
+"rarity": 5
+},
+{
+"id": 1637828705,
+"name": "Radar_LoveBuds_7",
+"family": 42,
+"rarity": 0
+},
+{
+"id": 1869648171,
+"name": "Radar_LoveBuds_6",
+"family": 42,
+"rarity": 1
+},
+{
+"id": 788912088,
+"name": "Radar_LoveBuds_5",
+"family": 42,
+"rarity": 1
+},
+{
+"id": 148992356,
+"name": "Radar_LoveBuds_2",
+"family": 42,
+"rarity": 2
+},
+{
+"id": 331330217,
+"name": "Radar_LoveBuds_3",
+"family": 42,
+"rarity": 2
+},
+{
+"id": 2493878857,
+"name": "Radar_LoveBuds_4",
+"family": 42,
+"rarity": 2
+},
+{
+"id": 110451637,
+"name": "Radar_LoveBuds_Q",
+"family": 42,
+"rarity": 5
+},
+{
+"id": 527156031,
+"name": "Shield_TheGoodKnights_7",
+"family": 43,
+"rarity": 0
+},
+{
+"id": 465507073,
+"name": "Shield_TheGoodKnights_5",
+"family": 43,
+"rarity": 1
+},
+{
+"id": 3413280579,
+"name": "Shield_TheGoodKnights_6",
+"family": 43,
+"rarity": 1
+},
+{
+"id": 1930161786,
+"name": "Shield_TheGoodKnights_2",
+"family": 43,
+"rarity": 2
+},
+{
+"id": 3373231121,
+"name": "Shield_TheGoodKnights_3",
+"family": 43,
+"rarity": 2
+},
+{
+"id": 1870121270,
+"name": "Shield_TheGoodKnights_4",
+"family": 43,
+"rarity": 2
+},
+{
+"id": 1147710685,
+"name": "Shield_TheGoodKnights_Q",
+"family": 43,
+"rarity": 5
+},
+{
+"id": 305345664,
+"name": "Magnet_Radashians_7",
+"family": 44,
+"rarity": 0
+},
+{
+"id": 2784477555,
+"name": "Magnet_Radashians_6",
+"family": 44,
+"rarity": 0
+},
+{
+"id": 3679349941,
+"name": "Magnet_Radashians_5",
+"family": 44,
+"rarity": 1
+},
+{
+"id": 955064864,
+"name": "Magnet_Radashians_4",
+"family": 44,
+"rarity": 1
+},
+{
+"id": 1961899098,
+"name": "Magnet_Radashians_2",
+"family": 44,
+"rarity": 2
+},
+{
+"id": 2236239158,
+"name": "Magnet_Radashians_3",
+"family": 44,
+"rarity": 2
+},
+{
+"id": 1674610488,
+"name": "Magnet_Radashians_Q",
+"family": 44,
+"rarity": 5
+},
+{
+"id": 168732035,
+"name": "Radar_Piniatos_4",
+"family": 45,
+"rarity": 0
+},
+{
+"id": 167301471,
+"name": "Radar_Piniatos_7",
+"family": 45,
+"rarity": 0
+},
+{
+"id": 1580850494,
+"name": "Radar_Piniatos_6",
+"family": 45,
+"rarity": 1
+},
+{
+"id": 3549612336,
+"name": "Radar_Piniatos_3",
+"family": 45,
+"rarity": 1
+},
+{
+"id": 3408336099,
+"name": "Radar_Piniatos_5",
+"family": 45,
+"rarity": 2
+},
+{
+"id": 3751463609,
+"name": "Radar_Piniatos_2",
+"family": 45,
+"rarity": 2
+},
+{
+"id": 2148466414,
+"name": "Radar_Piniatos_Q",
+"family": 45,
+"rarity": 5
+},
+{
+"id": 1111208668,
+"name": "Shield_TheLuchadors_2",
+"family": 46,
+"rarity": 0
+},
+{
+"id": 3605689559,
+"name": "Shield_TheLuchadors_3",
+"family": 46,
+"rarity": 0
+},
+{
+"id": 2832474891,
+"name": "Shield_TheLuchadors_7",
+"family": 46,
+"rarity": 1
+},
+{
+"id": 2531221951,
+"name": "Shield_TheLuchadors_6",
+"family": 46,
+"rarity": 1
+},
+{
+"id": 2825589447,
+"name": "Shield_TheLuchadors_5",
+"family": 46,
+"rarity": 2
+},
+{
+"id": 2397789711,
+"name": "Shield_TheLuchadors_4",
+"family": 46,
+"rarity": 2
+},
+{
+"id": 1033665019,
+"name": "Shield_TheLuchadors_Q",
+"family": 46,
+"rarity": 5
+},
+{
+"id": 2576167975,
+"name": "Shield_ThePokies_3",
+"family": 47,
+"rarity": 0
+},
+{
+"id": 3939001698,
+"name": "Shield_ThePokies_2",
+"family": 47,
+"rarity": 0
+},
+{
+"id": 107623895,
+"name": "Shield_ThePokies_7",
+"family": 47,
+"rarity": 1
+},
+{
+"id": 1828285117,
+"name": "Shield_ThePokies_6",
+"family": 47,
+"rarity": 1
+},
+{
+"id": 3126700799,
+"name": "Shield_ThePokies_4",
+"family": 47,
+"rarity": 2
+},
+{
+"id": 2667251574,
+"name": "Shield_ThePokies_5",
+"family": 47,
+"rarity": 2
+},
+{
+"id": 3153761524,
+"name": "Shield_ThePokies_Q",
+"family": 47,
+"rarity": 5
+},
+{
+"id": 3200236730,
+"name": "Magnet_TheShooShoos_7",
+"family": 48,
+"rarity": 0
+},
+{
+"id": 2342816946,
+"name": "Magnet_TheShooShoos_6",
+"family": 48,
+"rarity": 0
+},
+{
+"id": 3008063179,
+"name": "Magnet_TheShooShoos_4",
+"family": 48,
+"rarity": 1
+},
+{
+"id": 2755264486,
+"name": "Magnet_TheShooShoos_5",
+"family": 48,
+"rarity": 1
+},
+{
+"id": 813243189,
+"name": "Magnet_TheShooShoos_3",
+"family": 48,
+"rarity": 2
+},
+{
+"id": 2416483033,
+"name": "Magnet_TheShooShoos_2",
+"family": 48,
+"rarity": 2
+},
+{
+"id": 3110178548,
+"name": "Magnet_TheShooShoos_Q",
+"family": 48,
+"rarity": 5
+},
+{
+"id": 3072306837,
+"name": "Shield_TheSharkies_7",
+"family": 49,
+"rarity": 0
+},
+{
+"id": 3761887209,
+"name": "Shield_TheSharkies_6",
+"family": 49,
+"rarity": 0
+},
+{
+"id": 1460877861,
+"name": "Shield_TheSharkies_5",
+"family": 49,
+"rarity": 1
+},
+{
+"id": 961205138,
+"name": "Shield_TheSharkies_4",
+"family": 49,
+"rarity": 1
+},
+{
+"id": 2382343084,
+"name": "Shield_TheSharkies_2",
+"family": 49,
+"rarity": 2
+},
+{
+"id": 1677629677,
+"name": "Shield_TheSharkies_3",
+"family": 49,
+"rarity": 2
+},
+{
+"id": 3269947826,
+"name": "Shield_TheSharkies_Q",
+"family": 49,
+"rarity": 5
+},
+{
+"id": 79557684,
+"name": "Shield_TheHotHeads_7",
+"family": 50,
+"rarity": 0
+},
+{
+"id": 326650701,
+"name": "Shield_TheHotHeads_6",
+"family": 50,
+"rarity": 0
+},
+{
+"id": 3647690436,
+"name": "Shield_TheHotHeads_5",
+"family": 50,
+"rarity": 1
+},
+{
+"id": 580030957,
+"name": "Shield_TheHotHeads_4",
+"family": 50,
+"rarity": 1
+},
+{
+"id": 2008570802,
+"name": "Shield_TheHotHeads_3",
+"family": 50,
+"rarity": 2
+},
+{
+"id": 1780732553,
+"name": "Shield_TheHotHeads_2",
+"family": 50,
+"rarity": 2
+},
+{
+"id": 3341943472,
+"name": "Shield_TheHotHeads_Q",
+"family": 50,
+"rarity": 5
+},
+{
+"id": 3086080834,
+"name": "Radar_TheBooooos_7",
+"family": 51,
+"rarity": 0
+},
+{
+"id": 2219327846,
+"name": "Radar_TheBooooos_6",
+"family": 51,
+"rarity": 1
+},
+{
+"id": 1637048295,
+"name": "Radar_TheBooooos_5",
+"family": 51,
+"rarity": 1
+},
+{
+"id": 2728165928,
+"name": "Radar_TheBooooos_3",
+"family": 51,
+"rarity": 2
+},
+{
+"id": 1290820074,
+"name": "Radar_TheBooooos_4",
+"family": 51,
+"rarity": 2
+},
+{
+"id": 3711376336,
+"name": "Radar_TheBooooos_2",
+"family": 51,
+"rarity": 2
+},
+{
+"id": 2478580540,
+"name": "Radar_TheBooooos_Q",
+"family": 51,
+"rarity": 5
+},
+{
+"id": 939402506,
+"name": "Radar_Frostbites_7",
+"family": 52,
+"rarity": 0
+},
+{
+"id": 3813381838,
+"name": "Radar_Frostbites_5",
+"family": 52,
+"rarity": 1
+},
+{
+"id": 3043452264,
+"name": "Radar_Frostbites_6",
+"family": 52,
+"rarity": 1
+},
+{
+"id": 1221613350,
+"name": "Radar_Frostbites_3",
+"family": 52,
+"rarity": 2
+},
+{
+"id": 2068572215,
+"name": "Radar_Frostbites_4",
+"family": 52,
+"rarity": 2
+},
+{
+"id": 1154786791,
+"name": "Radar_Frostbites_2",
+"family": 52,
+"rarity": 2
+},
+{
+"id": 2733383436,
+"name": "Radar_Frostbites_Q",
+"family": 52,
+"rarity": 5
+},
+{
+"id": 3619354981,
+"name": "Radar_Sphynx_7",
+"family": 53,
+"rarity": 0
+},
+{
+"id": 2046561845,
+"name": "Radar_Sphynx_5",
+"family": 53,
+"rarity": 1
+},
+{
+"id": 3147816274,
+"name": "Radar_Sphynx_6",
+"family": 53,
+"rarity": 1
+},
+{
+"id": 3747378187,
+"name": "Radar_Sphynx_3",
+"family": 53,
+"rarity": 2
+},
+{
+"id": 1991562185,
+"name": "Radar_Sphynx_2",
+"family": 53,
+"rarity": 2
+},
+{
+"id": 3896043209,
+"name": "Radar_Sphynx_4",
+"family": 53,
+"rarity": 2
+},
+{
+"id": 3990807897,
+"name": "Radar_Sphynx_Q",
+"family": 53,
+"rarity": 5
+},
+{
+"id": 3399081115,
+"name": "Shield_Anubis_7",
+"family": 54,
+"rarity": 0
+},
+{
+"id": 1287501148,
+"name": "Shield_Anubis_6",
+"family": 54,
+"rarity": 0
+},
+{
+"id": 1471188604,
+"name": "Shield_Anubis_4",
+"family": 54,
+"rarity": 1
+},
+{
+"id": 3620912503,
+"name": "Shield_Anubis_5",
+"family": 54,
+"rarity": 1
+},
+{
+"id": 848875133,
+"name": "Shield_Anubis_3",
+"family": 54,
+"rarity": 2
+},
+{
+"id": 1457355629,
+"name": "Shield_Anubis_2",
+"family": 54,
+"rarity": 2
+},
+{
+"id": 2229758856,
+"name": "Shield_Anubis_Q",
+"family": 54,
+"rarity": 5
+},
+{
+"id": 3557422217,
+"name": "Radar_TheFrankies_7",
+"family": 55,
+"rarity": 0
+},
+{
+"id": 1474222206,
+"name": "Radar_TheFrankies_5",
+"family": 55,
+"rarity": 1
+},
+{
+"id": 3459914425,
+"name": "Radar_TheFrankies_6",
+"family": 55,
+"rarity": 1
+},
+{
+"id": 228783693,
+"name": "Radar_TheFrankies_4",
+"family": 55,
+"rarity": 2
+},
+{
+"id": 3328536227,
+"name": "Radar_TheFrankies_2",
+"family": 55,
+"rarity": 2
+},
+{
+"id": 2470078107,
+"name": "Radar_TheFrankies_3",
+"family": 55,
+"rarity": 2
+},
+{
+"id": 168843579,
+"name": "Radar_TheFrankies_Q",
+"family": 55,
+"rarity": 5
+},
+{
+"id": 864134687,
+"name": "Radar_Koi_7",
+"family": 56,
+"rarity": 0
+},
+{
+"id": 1892905886,
+"name": "Radar_Koi_6",
+"family": 56,
+"rarity": 1
+},
+{
+"id": 3563505996,
+"name": "Radar_Koi_5",
+"family": 56,
+"rarity": 1
+},
+{
+"id": 2724787881,
+"name": "Radar_Koi_3",
+"family": 56,
+"rarity": 2
+},
+{
+"id": 1995723583,
+"name": "Radar_Koi_4",
+"family": 56,
+"rarity": 2
+},
+{
+"id": 1859961306,
+"name": "Radar_Koi_2",
+"family": 56,
+"rarity": 2
+},
+{
+"id": 2642303897,
+"name": "Radar_Koi_Q",
+"family": 56,
+"rarity": 5
+},
+{
+"id": 2530670450,
+"name": "Shield_Origami_7",
+"family": 57,
+"rarity": 0
+},
+{
+"id": 788346673,
+"name": "Shield_Origami_5",
+"family": 57,
+"rarity": 1
+},
+{
+"id": 994554793,
+"name": "Shield_Origami_6",
+"family": 57,
+"rarity": 1
+},
+{
+"id": 3655592933,
+"name": "Shield_Origami_4",
+"family": 57,
+"rarity": 2
+},
+{
+"id": 905592060,
+"name": "Shield_Origami_2",
+"family": 57,
+"rarity": 2
+},
+{
+"id": 3638674537,
+"name": "Shield_Origami_3",
+"family": 57,
+"rarity": 2
+},
+{
+"id": 2568883641,
+"name": "Shield_Origami_Q",
+"family": 57,
+"rarity": 5
+},
+{
+"id": 227313307,
+"name": "Magnet_Alien_7",
+"family": 58,
+"rarity": 0
+},
+{
+"id": 986872640,
+"name": "Magnet_Alien_6",
+"family": 58,
+"rarity": 0
+},
+{
+"id": 1046143705,
+"name": "Magnet_Alien_5",
+"family": 58,
+"rarity": 1
+},
+{
+"id": 685049359,
+"name": "Magnet_Alien_4",
+"family": 58,
+"rarity": 1
+},
+{
+"id": 3753488200,
+"name": "Magnet_Alien_3",
+"family": 58,
+"rarity": 2
+},
+{
+"id": 2126800617,
+"name": "Magnet_Alien_2",
+"family": 58,
+"rarity": 2
+},
+{
+"id": 2161979250,
+"name": "Magnet_Alien_Q",
+"family": 58,
+"rarity": 5
+},
+{
+"id": 4260223745,
+"name": "Shield_Lollipop_7",
+"family": 59,
+"rarity": 0
+},
+{
+"id": 248240196,
+"name": "Shield_Lollipop_6",
+"family": 59,
+"rarity": 1
+},
+{
+"id": 2022546487,
+"name": "Shield_Lollipop_5",
+"family": 59,
+"rarity": 1
+},
+{
+"id": 2881036307,
+"name": "Shield_Lollipop_2",
+"family": 59,
+"rarity": 2
+},
+{
+"id": 2519189742,
+"name": "Shield_Lollipop_3",
+"family": 59,
+"rarity": 2
+},
+{
+"id": 3950230402,
+"name": "Shield_Lollipop_4",
+"family": 59,
+"rarity": 2
+},
+{
+"id": 2446994509,
+"name": "Shield_Lollipop_Q",
+"family": 59,
+"rarity": 5
+},
+{
+"id": 4243238588,
+"name": "Radar_Draggos_7",
+"family": 60,
+"rarity": 0
+},
+{
+"id": 3754060668,
+"name": "Radar_Draggos_5",
+"family": 60,
+"rarity": 1
+},
+{
+"id": 241355522,
+"name": "Radar_Draggos_6",
+"family": 60,
+"rarity": 1
+},
+{
+"id": 1672522714,
+"name": "Radar_Draggos_2",
+"family": 60,
+"rarity": 2
+},
+{
+"id": 1071150407,
+"name": "Radar_Draggos_4",
+"family": 60,
+"rarity": 2
+},
+{
+"id": 3387449689,
+"name": "Radar_Draggos_3",
+"family": 60,
+"rarity": 2
+},
+{
+"id": 1726021517,
+"name": "Radar_Draggos_Q",
+"family": 60,
+"rarity": 5
+},
+{
+"id": 3534889883,
+"name": "Shield_Gollems_7",
+"family": 61,
+"rarity": 0
+},
+{
+"id": 1116374016,
+"name": "Shield_Gollems_5",
+"family": 61,
+"rarity": 1
+},
+{
+"id": 303657566,
+"name": "Shield_Gollems_6",
+"family": 61,
+"rarity": 1
+},
+{
+"id": 486857000,
+"name": "Shield_Gollems_3",
+"family": 61,
+"rarity": 2
+},
+{
+"id": 2017801471,
+"name": "Shield_Gollems_4",
+"family": 61,
+"rarity": 2
+},
+{
+"id": 3672999721,
+"name": "Shield_Gollems_2",
+"family": 61,
+"rarity": 2
+},
+{
+"id": 1332352459,
+"name": "Shield_Gollems_Q",
+"family": 61,
+"rarity": 5
+},
+{
+"id": 2207661484,
+"name": "Shield_Pinecones_7",
+"family": 62,
+"rarity": 0
+},
+{
+"id": 4124671133,
+"name": "Shield_Pinecones_6",
+"family": 62,
+"rarity": 1
+},
+{
+"id": 3417738760,
+"name": "Shield_Pinecones_5",
+"family": 62,
+"rarity": 1
+},
+{
+"id": 2573748810,
+"name": "Shield_Pinecones_4",
+"family": 62,
+"rarity": 2
+},
+{
+"id": 3287449016,
+"name": "Shield_Pinecones_3",
+"family": 62,
+"rarity": 2
+},
+{
+"id": 987492241,
+"name": "Shield_Pinecones_2",
+"family": 62,
+"rarity": 2
+},
+{
+"id": 4017477574,
+"name": "Shield_Pinecones_Q",
+"family": 62,
+"rarity": 5
+},
+{
+"id": 1875078258,
+"name": "Magnet_Mammoth_6",
+"family": 63,
+"rarity": 0
+},
+{
+"id": 1225436514,
+"name": "Magnet_Mammoth_7",
+"family": 63,
+"rarity": 0
+},
+{
+"id": 3225324111,
+"name": "Magnet_Mammoth_4",
+"family": 63,
+"rarity": 1
+},
+{
+"id": 569081814,
+"name": "Magnet_Mammoth_5",
+"family": 63,
+"rarity": 1
+},
+{
+"id": 4149079365,
+"name": "Magnet_Mammoth_2",
+"family": 63,
+"rarity": 2
+},
+{
+"id": 2743304591,
+"name": "Magnet_Mammoth_3",
+"family": 63,
+"rarity": 2
+},
+{
+"id": 1723860934,
+"name": "Magnet_Mammoth_Q",
+"family": 63,
+"rarity": 5
+}
+]

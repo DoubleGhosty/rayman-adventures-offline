@@ -1,0 +1,30 @@
+# Build outputs
+offline_server/build/
+__pycache__/
+*.apk
+*.idsig
+*.xapk
+
+# Ubisoft binaries and data (published as release assets, not in git)
+apk/
+binaries/
+*.obb
+*.so
+
+# Signing / TLS keys (regenerated or kept locally)
+*.jks
+*.p12
+*.keystore
+
+# Player data: save backups and captured requests
+backups/
+captures/
+
+# Large local files
+tools/re/*.pkl
+screenshots/*
+!screenshots/screen_audit_*.png
+
+# Superseded scripts of the first (Gemini) phase, with local paths
+patch_purchase.py
+patch_ssl.py
