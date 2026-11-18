@@ -206,6 +206,12 @@ for off, patch in assemble_pack_purchase_hooks(data).items():
     data[off:off + len(patch)] = patch
 print("Applied pack purchase hook (packs paid with gems).")
 
+# --- Seasonal event texts name the costume really sold (scripts/event_text_hooks.py) ---
+from event_text_hooks import assemble as assemble_event_text_hooks
+for off, patch in assemble_event_text_hooks(data).items():
+    data[off:off + len(patch)] = patch
+print("Applied event text hook (costume names).")
+
 if "--debug" in sys.argv:
     from debug_hooks import assemble as assemble_debug_hooks
     dbg = assemble_debug_hooks()
