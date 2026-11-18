@@ -27,7 +27,7 @@ Ubisoft shut down the servers of *Rayman Adventures* on June 26, 2023. Since the
 - **Mini events** (Mini Marathon, Skull Scramble) every weekend.
 - **3 save slots** (the "Sauvegardes" button on the title screen), with **save codes**: the orange button of a slot gives a code, and the purple button of an empty slot copies that game into it (handy to keep a backup or start a second copy). Codes work on the same phone only and stay valid 7 days.
 - **Achievements** with their rewards.
-- Watch an optional **video ad** for a bonus, when the ad networks still answer. Forced ads are removed.
+- **No ads**: the "Regarder une publicité" buttons (free wheel spin, daily gift bonus, revive, mission change, adventure time extension...) give their reward right away, without any video. Forced ads are removed too.
 - Play with a **controller** (Xbox and others): connect it **before** launching the game.
 
 ![Seasonal event](screenshots/readme_event.jpg)
