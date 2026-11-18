@@ -20,7 +20,7 @@ OfflineServerProvider (a ContentProvider, started by Android before any activity
 
 Three kinds of changes make this work:
 
-- **Native patches and hooks** in `lib/arm64-v8a/libuaf.so`: network redirection, TLS check removed, and small code caves where the game needed a server answer that can no longer be produced the same way (eggs, tickets, incubator, shop guards, events that come back every year). See `scripts/*_hooks.py`.
+- **Native patches and hooks** in `lib/arm64-v8a/libuaf.so`: network redirection, TLS check removed, and small code caves where the game needed a server answer that can no longer be produced the same way (eggs, tickets, incubator, shop guards, events that come back every year, the title-screen login). See `scripts/*_hooks.py`.
 - **The embedded server** (`offline_server/src/com/rayman/offline/`, compiled to an extra `classesN.dex`) answers every request the game makes. It keeps its state per save slot in the app's `files/rlc/` folder.
 - **Small bytecode patches** to the game's own Java code (`scripts/dex_patches.py`): the Google Play Games sign-in is disabled.
 
@@ -89,9 +89,7 @@ After `adb forward tcp:18080 tcp:18080`:
 | `/offline/admin/seasonalEvent?id=3&days=7` | Run seasonal event 3 now (`id=0`: back to the calendar) |
 | `/offline/admin/challenge`, `/ageChallenges` | Daily challenge data, age stored scores by a day |
 
-A new seasonal calendar reaches the game only through `userprofile/meta` sent after the title-screen login. Reinstalling the APK is the reliable way to push a forced event during tests (the first launch after an install always logs in).
-
-The title-screen login sometimes loops: the game deletes its UbiServices session right after creating it, and `meta` never comes. It was frequent at times and then could not be reproduced in 30+ launches; the cause is on the client side and depends on timing. A `--debug` build logs the caller (`lr=`) of `Module::setState` and `Module::disconnect`: if you catch it, the `lr` of the `Module::disconnect` line next to `UbiServicesModule_SDK state=3` names the culprit (subtract `base`).
+A new seasonal calendar reaches the game only through `userprofile/meta` sent after the title-screen login. Restart the game twice after forcing an event: the first launch downloads it, the second applies it.
 
 ## Reverse-engineering tools (`tools/re/`)
 
@@ -111,5 +109,4 @@ The title-screen login sometimes loops: the game deletes its UbiServices session
 
 ## Known limits and ideas
 
-- The title-screen login sometimes loops (see above); the game still logs in when the player taps Play.
 - Only tested on WSA, not yet on a real ARM64 phone.

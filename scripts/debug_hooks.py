@@ -35,6 +35,10 @@ HOOKS = [
     (0x1827F88, "ldr w2, [x0, #0x2bc]",
      "Module::disconnect this=%p vt=%p state=%d base=%p lr=%p",
      "mov x3, x0\n    ldr x4, [x0]\n    ldr w5, [x0, #0x2bc]\n    mov x7, x30"),
+    # UbiServices SDK reconfigured (login_hooks.py): only while the module is disconnected
+    (0x184F040, "ldr x21, [x19, #0x4d8]",
+     "UbiServices SDK reconfigure this=%p vt=%p state=%d base=%p",
+     "mov x3, x19\n    ldr x4, [x19]\n    ldr w5, [x19, #0x2bc]"),
     # inventory: an elixir gain and the store credit it turns into (no credit = no stock found)
     (0x1785540, "sub sp, sp, #0x40",
      "InventoryManager::addElixirs type=%d amount=%d acq=%d base=%p",

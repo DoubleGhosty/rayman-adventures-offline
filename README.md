@@ -45,7 +45,6 @@ These needed services that are gone for good:
 ## Good to know
 
 - **"Échec de la connexion au serveur" when buying:** it means you don't have enough gems. The game tries to open the real-money gem shop, which no longer exists.
-- **"Connexion au serveur…" on the title screen:** wait a few seconds, or just tap Play.
 - **New game:** tap "Sauvegardes" on the title screen and pick an empty slot. Your other games are kept.
 - **Gems** are shared between the save slots.
 

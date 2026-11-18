@@ -182,6 +182,12 @@ for off, patch in ev.items():
     data[off:off + len(patch)] = patch
 print(f"Applied seasonal event hooks ({len(ev[EVENT_CAVE])} bytes cave at {EVENT_CAVE:#x}).")
 
+# --- Title-screen login: UbiServices not disconnected right after connecting (scripts/login_hooks.py) ---
+from login_hooks import assemble as assemble_login_hooks
+for off, patch in assemble_login_hooks(data).items():
+    data[off:off + len(patch)] = patch
+print("Applied login hook (no forced UbiServices disconnection).")
+
 if "--debug" in sys.argv:
     from debug_hooks import assemble as assemble_debug_hooks
     dbg = assemble_debug_hooks()
