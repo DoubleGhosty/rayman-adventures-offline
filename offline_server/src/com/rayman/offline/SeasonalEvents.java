@@ -23,22 +23,24 @@ import java.util.Calendar;
  * globals when userprofile/meta's gameGlobals.versionTime differs from its cached copy, so versionTime
  * changes with each scheduled event.
  *
- * Event ids (RLC_SeasonalEventManager::eSeasonalEvent, type from getEventType): hunts 1, 2, 3, 5, 6, 9;
- * spin wheels 7, 10, 13, 17; marathons 8, 11, 12, 16. Seen in game (2026-11-17): 3 = "La chasse au
- * tresor de Raybarbe" (doubloons hidden in the game; shop: Jolly-Roger ticket, sunken egg, Raybarbe),
- * 8 = a marathon (the daily challenge in event mode, shop "Echoppe": parchment ticket, Chatoeuf,
- * Raystidigitateur), 10 = "Expedition Rayhistorik" (Captain's wheel, prehistoric meat, shop
- * "Maglace-Zin": fur ticket, frozen egg, Barbarrrrr).
- * Id 4 (a hunt without costume) is left out. The game shows events from the 6th adventure on
- * (canDisplaySeasonalEvent: universe+0x724 > 4), with an intro popup once a day on the map.
+ * Event ids (RLC_SeasonalEventManager::eSeasonalEvent, type from getEventType): hunts 1, 2, 3, 4, 5, 6,
+ * 9; spin wheels 7, 10, 13, 17; marathons 8, 11, 12, 16; 14 and 15 are not events. Checked in game for
+ * every id (2026-11-18): the game only ships the look of the LAST event of each type, and every id of
+ * that type reuses it: hunt 9 "La chasse au tresor de Raybarbe" (doubloons; shop: Jolly-Roger ticket,
+ * sunken egg, Raybarbe costume), wheel 17 "Expedition Rayhistorik" (prehistoric meat; shop
+ * "Maglace-Zin": fur ticket, frozen egg, Barbarrrrr), marathon 16 (daily challenge in event mode; shop
+ * "Echoppe": parchment ticket, Chatoeuf, Raystidigitateur). What changes with the id: the costume
+ * actually sold (getCurrentSeasonalEventCostume, one per id, matched by StringID with the store catalog:
+ * see NAMES) with its catalog price, and the Incrediball families. The shop card still shows the
+ * latest event's costume picture and name. Id 4 has no costume (the shop sells it for 0) and is left out.
+ * The game shows events from the 6th adventure on (canDisplaySeasonalEvent: universe+0x724 > 4), with
+ * an intro popup once a day on the map.
  *
  * Calendar (our choice, Ubisoft's is lost): the year is cut into 14 slots of 26 days from January 1st
  * (device time), one event per slot: 23 days of event, then 3 "last chance" days to spend the event
  * currency (currentSeasonalEventCompleteEndingTime2), then the next one starts. The whole calendar of
  * YEARS years goes in one download, one override per event with a GameGlobalsDateIntervalCondition
  * (polymorphic JSON object, "_CLASS_NAME"): the game picks the current event itself at each launch.
- * The title-screen login that sends userprofile/meta (and so the download) does not always succeed
- * after a restart; with the whole calendar cached this no longer matters.
  */
 final class SeasonalEvents {
 
@@ -51,11 +53,15 @@ final class SeasonalEvents {
     static final int EVENT_DAYS = 23;
     /** Event of each slot, from January 1st. */
     static final int[] CALENDAR = {17, 12, 6, 1, 7, 11, 9, 2, 16, 13, 8, 3, 10, 5};
-    /** Log labels (type; names seen in game for 3, 8 and 10, the others from their costume constant). */
-    static final String[] NAMES = {"", "hunt 1", "hunt 2", "hunt La chasse au tresor de Raybarbe", "",
-            "hunt 5", "hunt 6", "wheel 7", "marathon 8 (shop Echoppe: Chatoeuf, Raystidigitateur)", "hunt 9",
-            "wheel Expedition Rayhistorik", "marathon 11", "marathon 12", "wheel 13", "", "", "marathon 16",
-            "wheel 17"};
+    /** Log labels: type, and the costume each id really sells (store catalog name, price in event currency). */
+    static final String[] NAMES = {"",
+            "hunt 1 (Teensy_Bunny, 2000)", "hunt 2 (Globox_Summer, 2500)", "hunt 3 (Globox_Halloween, 1900)",
+            "hunt 4 (no costume)", "hunt 5 (Barbara_Winter, 2500)", "hunt 6 (Rayman_Renaissance, 2500)",
+            "wheel 7 (Globox_Glombrero, 2500)", "marathon 8 (Rayman_Raybolt, 2500)",
+            "hunt 9 Raybarbe (Rayman_Raybeard, 2500)", "wheel 10 (Barbara_Hellen, 2500)",
+            "marathon 11 (Globox_Egyptian, 2500)", "marathon 12 (Barbara_Sakura, 2500)",
+            "wheel 13 (Rayman_Spaceray, 2500)", "", "", "marathon 16 Raystidigitateur (Rayman_Raywiz, 2500)",
+            "wheel 17 Expedition Rayhistorik (Barbara_IceAge, 3200)"};
 
     private SeasonalEvents() {
     }
