@@ -110,3 +110,7 @@ A new seasonal calendar reaches the game only through `userprofile/meta` sent af
 ## Known limits and ideas
 
 - Only tested on WSA, not yet on a real ARM64 phone.
+
+### To do
+
+- **Event shop: show the real costume picture.** The costume card shows the right name, but its picture slot only has the last event's costume art, so it is hidden for the other events. The icons of every costume exist (`dynamiccostumesendless.tpl`, animation id from `RLC_InAppPurchaseManager::getDynamicSlotCostumeIconAnimationID`). Two ways: spawn that actor on the card at runtime, or ship fixed screen data through the engine's patch bundles (`dlc/patch_*` + `patchdescription.xml`, `DlcManager::initialPatchDetection`). Details in DOSSIER_TECHNIQUE.md ("Carte du costume corrigée").
