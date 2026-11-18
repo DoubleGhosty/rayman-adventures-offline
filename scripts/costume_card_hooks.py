@@ -64,6 +64,7 @@ GET_UI_COMPONENT = 0xF75E3C     # Actor::GetComponent<UIComponent>()
 GET_UI_MASK = 0x10B2180         # UIComponent::getUIDisplayMask()
 SET_UI_MASK = 0x10C5ADC         # UIComponent::setUIDisplayMask(View::MaskIds, bool)
 GET_ANIM_LIGHT = 0xCB6DEC       # Actor::GetComponent<AnimLightComponent>()
+ICON_SCALE = 1.5                # icon size / card scale (an fmov immediate: n/16 * 2^e)
 GET_SCALE = 0xEA00C8            # Pickable::getScale() -> Vec2d (s0, s1)
 SET_SCALE = 0xEC9E94            # Pickable::setScale(const Vec2d&)
 
@@ -194,8 +195,9 @@ def icon_source():
     card's position; it loads asynchronously, so on the next calls (every frame of the event screen)
     once loaded (+0x10 bit 7 and +0x258 bit 3, as ActorSpawner::checkReadyAndRegister): bound to the
     card (Actor::createParentBind, as RO2_UIItemCompetitorsComponent does for its flags; binding it
-    earlier left a child without bind and crashed BindHandler::update) with the card's UI display mask,
-    1.5 times bigger (the icons are drawn for the pack slots), then setAnim and AIUtils::show. Its
+    earlier left a child without bind and crashed BindHandler::update) with the card's UI display mask
+    and the card's scale times ICON_SCALE (bind +0x48 cleared: BindHandler::updateWorldCoordinates
+    would copy the parent's scale every frame), then setAnim and AIUtils::show. Its
     ObjectRef is kept in ICON_STATE, so it is spawned again when the screen's scene is gone.
     """
     s_info = 0x50                   # SpawnActorInfo (0xe8 bytes): +0x20 pos, +0x38 path, +0xa0 scene, +0xe0 flags
@@ -307,8 +309,7 @@ bind:
     str wzr, [x9, #0x64]
     str xzr, [x9, #0x68]
     str wzr, [x9, #0x70]
-    mov w10, #1
-    strb w10, [x9, #0x48]
+    strb wzr, [x9, #0x48]           // +0x48: take the parent's scale every frame (would undo ICON_SCALE)
 mask:
     mov x0, x19
     bl {GET_UI_COMPONENT:#x}
@@ -325,9 +326,9 @@ mask:
     ldr x0, [sp, #0x40]
     bl {SET_UI_MASK:#x}
 scale:
-    mov x0, x22                     // the icons are drawn for the smaller pack slots: 1.5 times bigger
-    bl {GET_SCALE:#x}
-    fmov s2, #1.5
+    mov x0, x19                     // the card's scale times ICON_SCALE (the icons are drawn for the
+    bl {GET_SCALE:#x}               // smaller pack slots)
+    fmov s2, #{ICON_SCALE}
     fmul s0, s0, s2
     fmul s1, s1, s2
     str s0, [sp, #0x40]
