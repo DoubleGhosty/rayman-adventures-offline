@@ -25,6 +25,7 @@ Ubisoft shut down the servers of *Rayman Adventures* on June 26, 2023. Since the
 - Get the **daily gift**, run the **daily challenge**, find **Charlie's hidden eggs**, use the **magnifying glass**.
 - **Seasonal events** are back: spin wheels, treasure hunts and marathons, with their currency and shop. 14 events a year, each with its own costume and Incrediball families (the game only kept the scenery of the last event of each kind, so events of the same kind look alike). They start appearing after your **6th adventure**.
 - **Mini events** (Mini Marathon, Skull Scramble) every weekend.
+- **All costumes**: the ones that only came in real-money packs (Assassin, Splinter, Vaas, Christmas, WeForest, Persia...) and the Facebook-only **Ray-box** are sold for gems in the costume shop.
 - **3 save slots** (the "Sauvegardes" button on the title screen), with **save codes**: the orange button of a slot gives a code, and the purple button of an empty slot copies that game into it (handy to keep a backup or start a second copy). Codes work on the same phone only and stay valid 7 days.
 - **Achievements** with their rewards.
 - **No ads**: the "Regarder une publicité" buttons (free wheel spin, daily gift bonus, revive, mission change, adventure time extension...) give their reward right away, without any video. Forced ads are removed too.
@@ -37,7 +38,7 @@ Ubisoft shut down the servers of *Rayman Adventures* on June 26, 2023. Since the
 These needed services that are gone for good:
 
 - Buying gems or packs with **real money**. You earn gems by playing.
-- **Facebook**: login, friends, gifts between friends, the exclusive Raybox costume.
+- **Facebook**: login, friends, gifts between friends.
 - **Worldwide leaderboards**: you're the only player.
 - **Cloud save**, and save codes **between two phones** (a code only works on the phone that made it).
 - The **Google Play Games** login was removed, as it could never work again.

@@ -194,6 +194,12 @@ for off, patch in assemble_costume_card_hooks(data).items():
     data[off:off + len(patch)] = patch
 print("Applied event costume card hook.")
 
+# --- Exclusive costumes sold for gems (scripts/costume_unlock_hooks.py) ---
+from costume_unlock_hooks import assemble as assemble_costume_unlock_hooks
+for off, patch in assemble_costume_unlock_hooks(data).items():
+    data[off:off + len(patch)] = patch
+print("Applied exclusive costume hook.")
+
 if "--debug" in sys.argv:
     from debug_hooks import assemble as assemble_debug_hooks
     dbg = assemble_debug_hooks()

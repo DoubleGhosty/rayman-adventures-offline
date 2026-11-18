@@ -20,7 +20,7 @@ OfflineServerProvider (a ContentProvider, started by Android before any activity
 
 Three kinds of changes make this work:
 
-- **Native patches and hooks** in `lib/arm64-v8a/libuaf.so`: network redirection, TLS check removed, and small code caves where the game needed a server answer that can no longer be produced the same way (eggs, tickets, incubator, shop guards, events that come back every year, the event shop's costume card, the title-screen login). See `scripts/*_hooks.py`.
+- **Native patches and hooks** in `lib/arm64-v8a/libuaf.so`: network redirection, TLS check removed, and small code caves where the game needed a server answer that can no longer be produced the same way (eggs, tickets, incubator, shop guards, events that come back every year, the event shop's costume card, exclusive costumes sold for gems, the title-screen login). See `scripts/*_hooks.py`.
 - **The embedded server** (`offline_server/src/com/rayman/offline/`, compiled to an extra `classesN.dex`) answers every request the game makes. It keeps its state per save slot in the app's `files/rlc/` folder.
 - **Small bytecode patches** to the game's own Java code (`scripts/dex_patches.py`): the Google Play Games sign-in is disabled, and the rewarded-video buttons give their reward without showing an ad.
 
