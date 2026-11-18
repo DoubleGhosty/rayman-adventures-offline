@@ -51,8 +51,7 @@ final class MiniEvents {
                 start = c.getTimeInMillis();
                 c.add(Calendar.DAY_OF_MONTH, 3);
                 end = c.getTimeInMillis();
-                long week = Math.floorDiv(ServerState.dayOf(start), 7L);
-                name = week % 2 == 0 ? MINI_MARATHON : SKULL_SCRAMBLE;
+                name = weekendEvent(start);
             }
         }
         JSONObject out = new JSONObject();
@@ -60,6 +59,11 @@ final class MiniEvents {
         out.put("currentMiniEventStartingTime", end > 0 ? Incubator.format(start) : NULL_DATE);
         out.put("currentMiniEventEndingTime", end > 0 ? Incubator.format(end) : NULL_DATE);
         return out;
+    }
+
+    /** Event of the weekend starting on that Friday (alternating from one week to the next). */
+    static String weekendEvent(long fridayStart) {
+        return Math.floorDiv(ServerState.dayOf(fridayStart), 7L) % 2 == 0 ? MINI_MARATHON : SKULL_SCRAMBLE;
     }
 
     /** Admin tool: runs an event now for the given hours ("auto" goes back to the schedule). */

@@ -30,7 +30,8 @@ The release APK also embeds the game data (the OBB): `res/raw/game.properties` s
 
 | File | What it serves |
 |---|---|
-| `OfflineServer.java` | HTTP/TLS server, UbiServices (session, configuration), store catalog (gzipped, price word in the player's language), news page, routing |
+| `OfflineServer.java` | HTTP/TLS server, UbiServices (session, configuration), store catalog (gzipped, price word in the player's language), routing |
+| `News.java` | Title screen "Actualités" page: current and next seasonal events, weekend mini event, daily challenge (French or English) |
 | `RlcApi.java` | Game server entry point (`/v<N>/<module>/<action>`), profile, session, save slots |
 | `Slots.java`, `ProfileStore.java`, `ServerState.java` | Per-slot player profile and server-side state |
 | `SaveCodes.java` | Save codes of the Sauvegardes menu (copy a game into another slot) |

@@ -25,6 +25,7 @@ Ubisoft shut down the servers of *Rayman Adventures* on June 26, 2023. Since the
 - Get the **daily gift**, run the **daily challenge**, find **Charlie's hidden eggs**, use the **magnifying glass**.
 - **Seasonal events** are back: spin wheels, treasure hunts and marathons, with their currency and shop. 14 events a year, each with its own costume and Incrediball families (the game only kept the scenery of the last event of each kind, so events of the same kind look alike). They start appearing after your **6th adventure**.
 - **Mini events** (Mini Marathon, Skull Scramble) every weekend.
+- **News** ("Actualités" on the title screen): the event running now and the next ones, this weekend's mini event and the daily challenge.
 - **All costumes**: the ones that only came in real-money packs (Assassin, Splinter, Vaas, Christmas, WeForest, Persia...) and the Facebook-only **Ray-box** are sold for gems in the costume shop.
 - **Packs for gems**: the packs that cost real money are sold for gems instead: event currency, challenge tokens, and the special packs of the shop ("Le Must-have pack" and the next ones: costumes, elixirs, tickets...). A pack costs about 20% less than its contents bought one by one.
 - **3 save slots** (the "Sauvegardes" button on the title screen), with **save codes**: the orange button of a slot gives a code, and the purple button of an empty slot copies that game into it (handy to keep a backup or start a second copy). Codes work on the same phone only and stay valid 7 days.

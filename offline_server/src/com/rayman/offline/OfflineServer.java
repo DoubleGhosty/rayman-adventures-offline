@@ -377,25 +377,9 @@ public final class OfflineServer {
         return new String(storeData, UTF8).replace("{gems}", word).getBytes(UTF8);
     }
 
-    /**
-     * Title screen "Actualites": the game's WebView opens http://127.0.0.1:18080/v1/news/<language>
-     * (libuaf patch of GameServerModule::getNewsURL). Ubisoft's news pages are gone: a short page says so.
-     * Language = ITF language index (1 = French).
-     */
+    /** Title screen "Actualites" (News). */
     private static byte[] newsPage(String lang) {
-        boolean fr = lang.startsWith("1");
-        String title = fr ? "Pas d'actualité" : "No news";
-        String text = fr
-                ? "Les serveurs d'Ubisoft sont fermés : cette version de Rayman Adventures fonctionne hors ligne."
-                + " Les actualités ne sont plus publiées."
-                : "Ubisoft's servers are closed: this version of Rayman Adventures runs offline."
-                + " News are no longer published.";
-        return json("<!doctype html><html><head><meta charset=\"utf-8\">"
-                + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
-                + "<style>html,body{height:100%;margin:0}body{display:flex;align-items:center;justify-content:center;"
-                + "background:#0b3d5c;color:#fff;font-family:sans-serif;text-align:center}"
-                + "div{max-width:32em;padding:1.5em}h1{font-size:1.6em;margin:0 0 .6em}p{font-size:1.1em;line-height:1.4}"
-                + "</style></head><body><div><h1>" + title + "</h1><p>" + text + "</p></div></body></html>");
+        return json(News.page(lang));
     }
 
     private static byte[] houstonConfig() {
