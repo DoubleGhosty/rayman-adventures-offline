@@ -64,7 +64,7 @@ GET_UI_COMPONENT = 0xF75E3C     # Actor::GetComponent<UIComponent>()
 GET_UI_MASK = 0x10B2180         # UIComponent::getUIDisplayMask()
 SET_UI_MASK = 0x10C5ADC         # UIComponent::setUIDisplayMask(View::MaskIds, bool)
 GET_ANIM_LIGHT = 0xCB6DEC       # Actor::GetComponent<AnimLightComponent>()
-ICON_SCALE = 1.5                # icon size / card scale (an fmov immediate: n/16 * 2^e)
+ICON_SCALE = 1.25               # icon size / card scale (an fmov immediate: n/16 * 2^e)
 GET_SCALE = 0xEA00C8            # Pickable::getScale() -> Vec2d (s0, s1)
 SET_SCALE = 0xEC9E94            # Pickable::setScale(const Vec2d&)
 
