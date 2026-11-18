@@ -20,7 +20,7 @@ OfflineServerProvider (a ContentProvider, started by Android before any activity
 
 Three kinds of changes make this work:
 
-- **Native patches and hooks** in `lib/arm64-v8a/libuaf.so`: network redirection, TLS check removed, and small code caves where the game needed a server answer that can no longer be produced the same way (eggs, tickets, incubator, shop guards, events that come back every year, the event shop's costume card, exclusive costumes sold for gems, the title-screen login). See `scripts/*_hooks.py`.
+- **Native patches and hooks** in `lib/arm64-v8a/libuaf.so`: network redirection, TLS check removed, and small code caves where the game needed a server answer that can no longer be produced the same way (eggs, tickets, incubator, shop guards, events that come back every year, the event shop's costume card, exclusive costumes sold for gems, real-money packs paid with gems, the title-screen login). See `scripts/*_hooks.py`.
 - **The embedded server** (`offline_server/src/com/rayman/offline/`, compiled to an extra `classesN.dex`) answers every request the game makes. It keeps its state per save slot in the app's `files/rlc/` folder.
 - **Small bytecode patches** to the game's own Java code (`scripts/dex_patches.py`): the Google Play Games sign-in is disabled, and the rewarded-video buttons give their reward without showing an ad.
 
@@ -30,7 +30,7 @@ The release APK also embeds the game data (the OBB): `res/raw/game.properties` s
 
 | File | What it serves |
 |---|---|
-| `OfflineServer.java` | HTTP/TLS server, UbiServices (session, configuration), store catalog, news page, routing |
+| `OfflineServer.java` | HTTP/TLS server, UbiServices (session, configuration), store catalog (gzipped, price word in the player's language), news page, routing |
 | `RlcApi.java` | Game server entry point (`/v<N>/<module>/<action>`), profile, session, save slots |
 | `Slots.java`, `ProfileStore.java`, `ServerState.java` | Per-slot player profile and server-side state |
 | `SaveCodes.java` | Save codes of the Sauvegardes menu (copy a game into another slot) |
@@ -44,6 +44,10 @@ The release APK also embeds the game data (the OBB): `res/raw/game.properties` s
 ### Seasonal events in short
 
 The game ships with no event scheduled; Ubisoft used to override `enginedata/gameconfig/seasonaleventconfig.isg` through `gameglobals/getGameGlobals`. The server now sends 5 years of calendar in one answer: one override per event, each with a date condition, so the game picks the current event by itself at every launch. The answer is XXTEA-encrypted and base64-encoded, like Ubisoft's. The same answer also carries Ubisoft's own overrides bundled with the game (adventure durations, magnifying glass price, ticket weights, daily gifts: `mock_data/ubisoft_gameglobals.json`, from `tools/re/gameglobals.py`), because the game ignores its bundled globals once a newer download is cached. The game only ships the look of the last event of each type (Raybarbe hunt, Rayhistorik wheel, Raystidigitateur marathon); the other events reuse it but sell their own costume, so the shop's costume card is patched to show that costume's name (and to hide the last event's picture). A marathon is the daily challenge in event mode: during one, the challenge reward also gives 150 event currency (`Challenges.MARATHON_CURRENCY`). Details, formats and keys are in DOSSIER_TECHNIQUE.md ("Événements saisonniers").
+
+### Store in short
+
+The store catalog (`mock_data/store_v2_fixed.json`, written to the APK by `build_offline_server.py`) is read by the game's Mobile SDK, which keeps it in its own database. It asks for it with `gzip=1` and inflates the body itself, so the server sends it gzipped (a plain body was ignored: the SDK kept an old copy). Gem trades ("secondary store") are plain catalog entries. The real-money packs ("primary store") need a Google Play product: `scripts/store_packs.py` gives the ones that can work offline a product with a gem price (event currency, challenge tokens, special packs), and `scripts/pack_purchase_hooks.py` takes the gems and credits the pack instead of opening Google Play. Gem packs are left out, and so are the packs that need a server feature we don't have (time saving, perks, new creature eggs). `python scripts/store_packs.py` prints every pack with its price.
 
 ## Building
 
@@ -72,7 +76,7 @@ During development, `repackage_apk.py --no-obb` builds a 42 MB APK that installs
 Development was done on Windows Subsystem for Android (rooted, `adb connect 127.0.0.1:58526`). With two adb devices listed, `export ANDROID_SERIAL=127.0.0.1:58526`.
 
 - Server log: `adb logcat -s RaymanOffline` (every request and answer).
-- Debug build logs: `adb logcat -s RaymanDbg RaymanITF` (module states, engine URLs). `python tools/re/annot.py` turns module vtables into class names.
+- Debug build logs: `adb logcat -s RaymanDbg RaymanITF` (module states, engine URLs, the Mobile SDK's store messages). `python tools/re/annot.py` turns module vtables into class names.
 - **Back up the player's save before any test** (the app data folder and `Android/data/<package>`), and restore it afterwards.
 
 ### Admin endpoints

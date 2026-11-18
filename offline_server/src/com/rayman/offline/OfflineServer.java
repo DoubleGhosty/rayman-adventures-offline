@@ -302,7 +302,7 @@ public final class OfflineServer {
                         + "\"gatewayResources\":[],\"custom\":{}}");
             }
             if (path.contains("/store")) {
-                return storeData;
+                return storeCatalog(path);
             }
             if (path.contains("product=708") || path.startsWith("/?")) {
                 return houstonConfig();
@@ -330,6 +330,46 @@ public final class OfflineServer {
         }
         // PUT, DELETE, ...
         return genericOk();
+    }
+
+    /**
+     * Store catalogue (GET iap-mob /store/v2/?...&language=fr&gzip=1). The packs sold for gems show the
+     * price "<n> {gems}" (scripts/store_packs.py): the word is put in the player's language.
+     *
+     * With gzip=1 the Mobile SDK inflates the body itself (zlib inflateInit2, windowBits 31 = gzip,
+     * libuaf 0x1a1d820) without any Content-Encoding header: a plain JSON body gives "Dynamic store
+     * result from Houston : (null)" and the SDK keeps the catalogue it already has in its database.
+     */
+    private static byte[] storeCatalog(String path) {
+        byte[] body = localizedCatalog(path);
+        if (!path.contains("gzip=1")) {
+            return body;
+        }
+        try {
+            java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream(body.length / 4);
+            java.util.zip.GZIPOutputStream gz = new java.util.zip.GZIPOutputStream(out);
+            gz.write(body);
+            gz.close();
+            return out.toByteArray();
+        } catch (IOException e) {
+            Log.e(TAG, "store catalogue gzip", e);
+            return body;
+        }
+    }
+
+    private static byte[] localizedCatalog(String path) {
+        java.util.regex.Matcher m = java.util.regex.Pattern.compile("[?&]language=([a-zA-Z]+)").matcher(path);
+        String lang = m.find() ? m.group(1).toLowerCase(java.util.Locale.US) : "en";
+        String word;
+        switch (lang) {
+            case "fr": word = "gemmes"; break;
+            case "de": word = "Juwelen"; break;
+            case "es": case "pt": word = "gemas"; break;
+            case "it": word = "gemme"; break;
+            case "nl": word = "edelstenen"; break;
+            default: word = "gems"; break;
+        }
+        return new String(storeData, UTF8).replace("{gems}", word).getBytes(UTF8);
     }
 
     /**

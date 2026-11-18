@@ -12,6 +12,9 @@ import shutil
 import subprocess
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import store_packs  # noqa: E402
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(BASE_DIR, ".."))
 SRV_DIR = os.path.join(ROOT_DIR, "offline_server")
@@ -89,6 +92,8 @@ def write_store_catalog(src, dst):
     - The parser (0x19f8f20 secondary trades, 0x19f99b8 primary trades) reads "item_id" and
       "amount" of the *received* items with atoi() on the JSON string value: a JSON number has
       no string value, so every pack had a quantity of 0. The "for" (price) side accepts both.
+      Same for "trade_id" (the primary trades had numbers: every pack had the id 0).
+    - The real-money packs that work offline are sold for gems (store_packs.py).
     """
     with open(src, encoding="utf-8") as f:
         store = json.load(f)
@@ -99,9 +104,12 @@ def write_store_catalog(src, dst):
             item["params"] = [{"key": "ITEM_TYPE", "value": t}]
             typed += 1
     print(f"  store catalogue: ITEM_TYPE set on {typed}/{len(store.get('items', []))} items")
+    sold, skipped = store_packs.sell_packs_for_gems(store)
+    print(f"  store catalogue: {len(sold)} real-money packs sold for gems, {len(skipped)} left out")
     n = 0
     for section in ("primaryStore", "secondaryStore"):
         for trade in store.get(section, []):
+            trade["trade_id"] = str(trade["trade_id"])   # also read with atoi (primary trades had numbers: id 0)
             for item in trade.get("get", {}).get("items", []):
                 item["item_id"] = str(item["item_id"])
                 item["amount"] = str(item["amount"])

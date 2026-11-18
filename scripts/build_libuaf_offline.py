@@ -200,6 +200,12 @@ for off, patch in assemble_costume_unlock_hooks(data).items():
     data[off:off + len(patch)] = patch
 print("Applied exclusive costume hook.")
 
+# --- Real-money packs paid with gems (scripts/pack_purchase_hooks.py, catalogue: scripts/store_packs.py) ---
+from pack_purchase_hooks import assemble as assemble_pack_purchase_hooks
+for off, patch in assemble_pack_purchase_hooks(data).items():
+    data[off:off + len(patch)] = patch
+print("Applied pack purchase hook (packs paid with gems).")
+
 if "--debug" in sys.argv:
     from debug_hooks import assemble as assemble_debug_hooks
     dbg = assemble_debug_hooks()

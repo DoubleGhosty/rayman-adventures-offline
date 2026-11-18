@@ -9,6 +9,9 @@
 2. ITF engine logger (tag "RaymanITF"): ITF::Logger::print / printV are empty stubs in the
    release build; they are rewired to __android_log_print / __android_log_vprint, which
    exposes all of the engine's own diagnostics ("url=%s", "Request failed: %s"...).
+   The Mobile SDK's log (online::MSDKlogv) goes to the same tag, format string only: some of
+   its messages pass arguments that do not match their format and would crash vsnprintf
+   ("[DynamicStore] primary Store creation, with %ld items"...).
 
 Read with:  adb logcat -s RaymanDbg RaymanITF
 """
@@ -19,6 +22,7 @@ LOG_PRINT_PLT = 0xC6E930   # __android_log_print@plt
 LOG_VPRINT_PLT = 0xC6F9B0  # __android_log_vprint@plt
 LOGGER_PRINT = 0x18A9A24   # ITF::Logger::print(this, fmt, ...)      empty stub, 0x44 bytes
 LOGGER_PRINTV = 0x18A9A68  # ITF::Logger::printV(this, fmt, va_list) single "ret"
+MSDK_LOGV = 0x181B7AC      # online::MSDKlogv(level, fmt, va_list) single "ret": the Mobile SDK's log
 
 # (address, displaced instruction (position independent), format, argument setup)
 # The setup runs with the original x0..x8 live and must put printf arguments in x3, x4, x5, x7
@@ -104,9 +108,17 @@ dbg_printv:
     adr x1, dbg_itf_tag
     mov w0, #4
     b {LOG_VPRINT_PLT:#x}
+
+dbg_msdk_log:
+    mov x3, x1
+    adr x2, dbg_fmt_s
+    adr x1, dbg_itf_tag
+    mov w0, #4
+    b {LOG_PRINT_PLT:#x}
 """
     data = "\ndbg_tag:\n" + _bytes_directive(b"RaymanDbg\x00")
     data += "dbg_itf_tag:\n" + _bytes_directive(b"RaymanITF\x00")
+    data += "dbg_fmt_s:\n" + _bytes_directive(b"%s\x00")
     for i, (_a, _d, fmt, _s) in enumerate(HOOKS):
         data += f"dbg_fmt_{i}:\n" + _bytes_directive(fmt.encode() + b"\x00")
     return code, data
@@ -131,6 +143,8 @@ def assemble():
         patches[addr] = bytes(ks.asm(f"b {entry:#x}", addr)[0])
     printv = _label_addr(ks, code, "dbg_printv")
     patches[LOGGER_PRINTV] = bytes(ks.asm(f"b {printv:#x}", LOGGER_PRINTV)[0])
+    msdk_log = _label_addr(ks, code, "dbg_msdk_log")
+    patches[MSDK_LOGV] = bytes(ks.asm(f"b {msdk_log:#x}", MSDK_LOGV)[0])
     # address of dbg_itf_tag = code size + size of the dbg_tag bytes (10)
     tag = _label_addr(ks, code + "\nend_of_code:", "end_of_code") + len(b"RaymanDbg\x00")
     assert blob[tag - CAVE:tag - CAVE + 10] == b"RaymanITF\x00"

@@ -4,9 +4,9 @@ are sold for their gem price in the costume shop.
 dynamicStore::createInventoryItemsIfNeeded builds the store inventory from the store SDK's catalogue
 at each launch. A costume's state (RLC_Costume +0x14) comes from its trade's args[1] (case-insensitive):
 "facebook" -> LockedFacebook (4), "starterpack" / "storebundle" -> LockedStoreBundle (5), anything
-else -> NotOwned (2), then Owned (3) for the costumes the player has. The SDK keeps its own copy of
-the catalogue (encrypted files/msdk) and does not always take a changed one, so the state is decided
-here rather than in our catalogue.
+else -> NotOwned (2), then Owned (3) for the costumes the player has. The state is decided here
+rather than in our catalogue: when this was written the SDK kept an old copy of the catalogue in its
+database (files/msdk), as the server did not gzip it (see OfflineServer.storeCatalog).
 
 Hook at 0x1842244 "str w23, [x19, #0x14]" (x19 = the new RLC_Costume, w23 = its state, x22 = the
 msdk_SecondaryStoreItem trade: +0x18 -> price item, item id at +0; +0x20 price): a costume in state
@@ -19,7 +19,7 @@ Persia; Teensy Cromagnon, Ninja, WeForest.
 """
 
 CAVE = 0xFDC110             # zero run 0xfdc104..0xfdd0f8, nothing branches into it
-CAVE_END = 0xFDD0F8
+CAVE_END = 0xFDC200         # the rest of the zero run: pack_purchase_hooks.py
 HOOK = 0x1842244
 HOOK_ORIG = "771600b9"      # str w23, [x19, #0x14]
 HOOK_RETURN = 0x1842248
