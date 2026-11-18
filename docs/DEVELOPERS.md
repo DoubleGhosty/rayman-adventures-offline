@@ -20,7 +20,7 @@ OfflineServerProvider (a ContentProvider, started by Android before any activity
 
 Three kinds of changes make this work:
 
-- **Native patches and hooks** in `lib/arm64-v8a/libuaf.so`: network redirection, TLS check removed, and small code caves where the game needed a server answer that can no longer be produced the same way (eggs, tickets, incubator, shop guards, events that come back every year, the title-screen login). See `scripts/*_hooks.py`.
+- **Native patches and hooks** in `lib/arm64-v8a/libuaf.so`: network redirection, TLS check removed, and small code caves where the game needed a server answer that can no longer be produced the same way (eggs, tickets, incubator, shop guards, events that come back every year, the event shop's costume card, the title-screen login). See `scripts/*_hooks.py`.
 - **The embedded server** (`offline_server/src/com/rayman/offline/`, compiled to an extra `classesN.dex`) answers every request the game makes. It keeps its state per save slot in the app's `files/rlc/` folder.
 - **Small bytecode patches** to the game's own Java code (`scripts/dex_patches.py`): the Google Play Games sign-in is disabled.
 
@@ -42,7 +42,7 @@ The release APK also embeds the game data (the OBB): `res/raw/game.properties` s
 
 ### Seasonal events in short
 
-The game ships with no event scheduled; Ubisoft used to override `enginedata/gameconfig/seasonaleventconfig.isg` through `gameglobals/getGameGlobals`. The server now sends 5 years of calendar in one answer: one override per event, each with a date condition, so the game picks the current event by itself at every launch. The answer is XXTEA-encrypted and base64-encoded, like Ubisoft's. The same answer also carries Ubisoft's own overrides bundled with the game (adventure durations, magnifying glass price, ticket weights, daily gifts: `mock_data/ubisoft_gameglobals.json`, from `tools/re/gameglobals.py`), because the game ignores its bundled globals once a newer download is cached. A marathon is the daily challenge in event mode: during one, the challenge reward also gives 150 event currency (`Challenges.MARATHON_CURRENCY`). Details, formats and keys are in DOSSIER_TECHNIQUE.md ("Événements saisonniers").
+The game ships with no event scheduled; Ubisoft used to override `enginedata/gameconfig/seasonaleventconfig.isg` through `gameglobals/getGameGlobals`. The server now sends 5 years of calendar in one answer: one override per event, each with a date condition, so the game picks the current event by itself at every launch. The answer is XXTEA-encrypted and base64-encoded, like Ubisoft's. The same answer also carries Ubisoft's own overrides bundled with the game (adventure durations, magnifying glass price, ticket weights, daily gifts: `mock_data/ubisoft_gameglobals.json`, from `tools/re/gameglobals.py`), because the game ignores its bundled globals once a newer download is cached. The game only ships the look of the last event of each type (Raybarbe hunt, Rayhistorik wheel, Raystidigitateur marathon); the other events reuse it but sell their own costume, so the shop's costume card is patched to show that costume's name (and to hide the last event's picture). A marathon is the daily challenge in event mode: during one, the challenge reward also gives 150 event currency (`Challenges.MARATHON_CURRENCY`). Details, formats and keys are in DOSSIER_TECHNIQUE.md ("Événements saisonniers").
 
 ## Building
 

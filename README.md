@@ -23,7 +23,7 @@ Ubisoft shut down the servers of *Rayman Adventures* on June 26, 2023. Since the
 - **Hatch eggs** in the incubator, use **elixirs**, and collect the 380 Incrediballs.
 - Scratch **lucky tickets and golden tickets** (with the original odds).
 - Get the **daily gift**, run the **daily challenge**, find **Charlie's hidden eggs**, use the **magnifying glass**.
-- **Seasonal events** are back: spin wheels, treasure hunts and marathons, each with its own currency, shop, costume and Incrediball families. They follow a yearly calendar and start appearing after your **6th adventure**.
+- **Seasonal events** are back: spin wheels, treasure hunts and marathons, with their currency and shop. 14 events a year, each with its own costume and Incrediball families (the game only kept the scenery of the last event of each kind, so events of the same kind look alike). They start appearing after your **6th adventure**.
 - **Mini events** (Mini Marathon, Skull Scramble) every weekend.
 - **3 save slots** (the "Sauvegardes" button on the title screen).
 - **Achievements** with their rewards.

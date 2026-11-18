@@ -188,6 +188,12 @@ for off, patch in assemble_login_hooks(data).items():
     data[off:off + len(patch)] = patch
 print("Applied login hook (no forced UbiServices disconnection).")
 
+# --- Event shop costume card: title and picture of the costume really sold (scripts/costume_card_hooks.py) ---
+from costume_card_hooks import assemble as assemble_costume_card_hooks
+for off, patch in assemble_costume_card_hooks(data).items():
+    data[off:off + len(patch)] = patch
+print("Applied event costume card hook.")
+
 if "--debug" in sys.argv:
     from debug_hooks import assemble as assemble_debug_hooks
     dbg = assemble_debug_hooks()
