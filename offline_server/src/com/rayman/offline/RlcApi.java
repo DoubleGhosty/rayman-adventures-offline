@@ -192,6 +192,12 @@ final class RlcApi {
             if (action.equals("unlinkSlot")) {
                 return unlinkSlot(in);
             }
+            if (action.equals("createLinkCode")) {
+                return SaveCodes.createLinkCode(in);
+            }
+            if (action.equals("slot")) {
+                return SaveCodes.linkSlot(in);
+            }
             if (action.equals("getShortProfiles")) {
                 return Leaderboards.shortProfiles(in);
             }

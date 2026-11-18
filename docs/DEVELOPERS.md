@@ -33,6 +33,7 @@ The release APK also embeds the game data (the OBB): `res/raw/game.properties` s
 | `OfflineServer.java` | HTTP/TLS server, UbiServices (session, configuration), store catalog, news page, routing |
 | `RlcApi.java` | Game server entry point (`/v<N>/<module>/<action>`), profile, session, save slots |
 | `Slots.java`, `ProfileStore.java`, `ServerState.java` | Per-slot player profile and server-side state |
+| `SaveCodes.java` | Save codes of the Sauvegardes menu (copy a game into another slot) |
 | `Incubator.java` | Incubator, hatching, elixirs, Charlie, magnifying glass |
 | `Rewards.java` | Lucky ticket draws with Ubisoft's own weight tables |
 | `DailyRewards.java`, `Challenges.java`, `Ghosts.java`, `Leaderboards.java` | Daily gift, daily challenge, ghosts, local leaderboards |
