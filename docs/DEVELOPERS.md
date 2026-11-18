@@ -115,3 +115,6 @@ A new seasonal calendar reaches the game only through `userprofile/meta` sent af
 ### To do
 
 - **Event shop: show the real costume picture.** The costume card shows the right name, but its picture slot only has the last event's costume art, so it is hidden for the other events. The icons of every costume exist (`dynamiccostumesendless.tpl`, animation id from `RLC_InAppPurchaseManager::getDynamicSlotCostumeIconAnimationID`). Two ways: spawn that actor on the card at runtime, or ship fixed screen data through the engine's patch bundles (`dlc/patch_*` + `patchdescription.xml`, `DlcManager::initialPatchDetection`). Details in DOSSIER_TECHNIQUE.md ("Carte du costume corrigée").
+  Note: another revival (Reawaken) shows a picture only because it runs the event whose costume is built in (wheel 17 = Barbarrrrr); it sells the other event costumes for gems in the main costume shop, which has a thumbnail for every costume.
+- **Hunt intro text.** The hunt intro popup always says "le nouveau costume de Raybarbe", whatever the hunt (fixed text of the popup).
+- **Move a save to another phone.** Save codes (`SaveCodes.java`) only work on the phone that made them. Export a game as a file (profile + server state + ghost, like a code snapshot) and import it on another phone, for example from the Sauvegardes menu or a share/file picker in the app.
