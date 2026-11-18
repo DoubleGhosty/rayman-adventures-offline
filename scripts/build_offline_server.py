@@ -131,6 +131,9 @@ def main():
     # Ubisoft's lucky ticket weight tables (dumped from the game by tools/re/dump_ticket_weights.py)
     shutil.copyfile(os.path.join(ROOT_DIR, "mock_data", "ticket_weights.json"),
                     os.path.join(ASSETS_DIR, "ticket_weights.json"))
+    # the 380 Incrediballs {id, name, family, rarity}: collections of the leaderboards' fictional players
+    shutil.copyfile(os.path.join(ROOT_DIR, "mock_data", "creatures.json"),
+                    os.path.join(ASSETS_DIR, "creatures.json"))
     # Ubisoft's own game globals overrides (extracted from the OBB by tools/re/gameglobals.py)
     shutil.copyfile(os.path.join(ROOT_DIR, "mock_data", "ubisoft_gameglobals.json"),
                     os.path.join(ASSETS_DIR, "ubisoft_gameglobals.json"))

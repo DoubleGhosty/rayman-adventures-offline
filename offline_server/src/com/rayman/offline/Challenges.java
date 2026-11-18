@@ -22,12 +22,16 @@ import java.util.Iterator;
  *                        refill itself is done by the client.
  *   postChallenge     {score} -> challengeScoreResult {updated}
  *   leaderboardConfig -> challengeLeaderboardConfig {playerRank, totalPlayers}
- *   leaderboard       {leaderboardRanges} -> challengeLeaderboardData {entries[challengeScoreEntry]}
+ *   leaderboard       {leaderboardRanges: [first, last] 0-based positions} -> challengeLeaderboardData
+ *                     {entries[challengeScoreEntry]}
  *   setCollected      -> GameServerEmpty (rewards of the previous challenge taken)
  *
- * Offline there are no other players: the leaderboard holds the player alone, so a played challenge
- * always ends at rank 1/1. A new challenge starts every local day. During a marathon seasonal event the
- * challenge is the event (the client shows it in event mode) and its reward includes event currency.
+ * Offline the other players are fictional (FictionalPlayers): every day about 280 of them take part,
+ * with scores spread around the player's usual score (the median of the player's best scores of the
+ * previous days, fixed for the day when the player first plays it), so beating one's usual score
+ * gives a good rank. The reward is the same at every rank (the ranking is for fun). A new challenge
+ * starts every local day. During a marathon seasonal event the challenge is the event (the client
+ * shows it in event mode) and its reward includes event currency.
  */
 final class Challenges {
 
@@ -49,6 +53,11 @@ final class Challenges {
      * spawnSeasonalEventActors).
      */
     static final int MARATHON_CURRENCY = 150;
+
+    /** Last rank of the last reward tier: every rank gets the reward. */
+    private static final int ANY_RANK = 1000000;
+    /** Score the fictional players are spread around before the player has a usual score. */
+    private static final double FIRST_TYPICAL = 5000;
 
     private Challenges() {
     }
@@ -96,8 +105,9 @@ final class Challenges {
 
         long pending = pendingCollectDay(today);
         out.put("canCollect", pending >= 0);
-        out.put("challengeRank", pending >= 0 ? 1 : 0);
-        out.put("challengeTotalPlayers", pending >= 0 ? 1 : 0);
+        long[] rank = pending >= 0 ? rank(pending) : new long[]{0, 0};
+        out.put("challengeRank", rank[0]);
+        out.put("challengeTotalPlayers", rank[1]);
         out.put("challengeDate", Incubator.format(ServerState.dayStart(pending >= 0 ? pending : today)));
 
         out.put("tokenCount", TOKEN_COUNT);
@@ -125,14 +135,21 @@ final class Challenges {
         return best;
     }
 
-    /** online::challengeRewardList, sorted by maxRank: the client picks the first tier with rank <= maxRank. */
+    /**
+     * online::challengeRewardList, sorted by maxRank: the client picks the first tier with rank <= maxRank.
+     * The menu labels the first tier "RANG [minRank]" and the next ones "DE [minRank] A [maxRank]" or
+     * "Top [maxPercent]%" (RLC_ChallengeManager::onRewardElementAppear): every rank gets the same
+     * reward, shown as "1e" and "Top 100%".
+     */
     private static JSONArray rewardTiers() throws JSONException {
         JSONArray tiers = new JSONArray();
-        if (SeasonalEvents.marathonRunning()) {
-            tiers.put(tier(1, 1, 0, reward(REWARD_SEASONAL_CURRENCY, MARATHON_CURRENCY), reward(REWARD_GEMS, 25),
-                    reward(REWARD_LUCKY_TICKET, 1)));
-        } else {
-            tiers.put(tier(1, 1, 0, reward(REWARD_GEMS, 25), reward(REWARD_LUCKY_TICKET, 1)));
+        for (int[] range : new int[][]{{1, 1, 0}, {2, ANY_RANK, 100}}) {
+            if (SeasonalEvents.marathonRunning()) {
+                tiers.put(tier(range[0], range[1], range[2], reward(REWARD_SEASONAL_CURRENCY, MARATHON_CURRENCY),
+                        reward(REWARD_GEMS, 25), reward(REWARD_LUCKY_TICKET, 1)));
+            } else {
+                tiers.put(tier(range[0], range[1], range[2], reward(REWARD_GEMS, 25), reward(REWARD_LUCKY_TICKET, 1)));
+            }
         }
         return tiers;
     }
@@ -165,6 +182,9 @@ final class Challenges {
         long today = ServerState.today();
         JSONObject d = day(today, true);
         boolean updated = !d.has("best") || score > d.getDouble("best");
+        if (!d.has("typical")) {
+            d.put("typical", usualScore(today, score));
+        }
         if (updated) {
             d.put("best", score);
         }
@@ -177,30 +197,107 @@ final class Challenges {
     }
 
     static JSONObject leaderboardConfig() throws JSONException {
-        JSONObject d = day(ServerState.today(), false);
-        boolean played = d != null && d.has("best");
+        long[] rank = rank(ServerState.today());
         JSONObject out = new JSONObject();
-        out.put("playerRank", played ? 1 : 0);
-        out.put("totalPlayers", played ? 1 : 0);
+        out.put("playerRank", rank[0]);
+        out.put("totalPlayers", rank[1]);
         return out;
     }
 
-    static JSONObject leaderboard() throws JSONException {
-        JSONArray entries = new JSONArray();
-        JSONObject d = day(ServerState.today(), false);
+    /** Median of the player's best scores before {@code day} ({@code fallback} if none). */
+    private static double usualScore(long day, double fallback) {
+        java.util.List<Double> bests = new java.util.ArrayList<>();
+        Iterator<String> it = days().keys();
+        while (it.hasNext()) {
+            String k = it.next();
+            JSONObject o = days().optJSONObject(k);
+            try {
+                if (o != null && o.has("best") && Long.parseLong(k) < day) {
+                    bests.add(o.optDouble("best", 0));
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        if (bests.isEmpty()) {
+            return fallback > 0 ? fallback : FIRST_TYPICAL;
+        }
+        java.util.Collections.sort(bests);
+        return bests.get(bests.size() / 2);
+    }
+
+    /** The day's ranking, best first: {fictional player index (-1 = the player), score}. */
+    private static java.util.List<long[]> ranking(long day) throws JSONException {
+        JSONObject d = day(day, false);
+        double typical = d != null && d.has("typical") ? d.getDouble("typical") : usualScore(day, 0);
+        java.util.List<long[]> all = new java.util.ArrayList<>();
+        for (int i = 0; i < FictionalPlayers.CHALLENGE; i++) {
+            if (FictionalPlayers.hashOf(i, day) % 10 < 7) {          // about 7 in 10 play a given day
+                all.add(new long[]{i, FictionalPlayers.scoreAround(i, day * 31 + 7, typical)});
+            }
+        }
         if (d != null && d.has("best")) {
-            JSONObject p = ProfileStore.get();
+            all.add(new long[]{-1, (long) d.getDouble("best")});
+        }
+        java.util.Collections.sort(all, (a, b) -> a[1] != b[1] ? Long.compare(b[1], a[1]) : Long.compare(a[0], b[0]));
+        return all;
+    }
+
+    /** {player's rank (0: did not play), number of players} of a day. */
+    private static long[] rank(long day) throws JSONException {
+        java.util.List<long[]> all = ranking(day);
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i)[0] < 0) {
+                return new long[]{i + 1, all.size()};
+            }
+        }
+        return new long[]{0, all.size()};
+    }
+
+    /**
+     * leaderboard {leaderboardRanges}: the entries of the ranks asked for, as pairs of 0-based first and
+     * last positions ([0, 9] = the top 10), else the top 10.
+     */
+    static JSONObject leaderboard(JSONObject in) throws JSONException {
+        java.util.List<long[]> all = ranking(ServerState.today());
+        java.util.TreeSet<Integer> ranks = new java.util.TreeSet<>();
+        JSONArray asked = in.optJSONArray("leaderboardRanges");
+        for (int i = 0; asked != null && i < asked.length(); i += 2) {
+            int first = asked.optInt(i, 0);
+            int last = i + 1 < asked.length() ? asked.optInt(i + 1, first) : first;
+            for (int r = Math.max(0, first) + 1; r <= Math.min(last + 1, all.size()); r++) {
+                ranks.add(r);
+            }
+        }
+        if (ranks.isEmpty()) {
+            for (int r = 1; r <= Math.min(10, all.size()); r++) {
+                ranks.add(r);
+            }
+        }
+        JSONObject p = ProfileStore.get();
+        JSONArray entries = new JSONArray();
+        for (int r : ranks) {
+            long[] a = all.get(r - 1);
             JSONObject e = new JSONObject();
-            String pid = p.optString("pid", RlcApi.PLAYER_PID);
-            e.put("name", p.optString("privateName", p.optString("name", "")));
-            e.put("pid", pid);
-            e.put("checkpid", pid);
-            e.put("score", (long) d.getDouble("best"));
+            if (a[0] < 0) {
+                String pid = p.optString("pid", RlcApi.PLAYER_PID);
+                e.put("name", p.optString("privateName", p.optString("name", "")));
+                e.put("pid", pid);
+                e.put("checkpid", pid);
+                e.put("costume", p.optLong("costume", 0));
+                e.put("img", p.optString("img", ""));
+                e.put("country", p.optString("deviceCountry", ""));
+            } else {
+                FictionalPlayers.Player f = FictionalPlayers.get((int) a[0]);
+                e.put("name", f.name);
+                e.put("pid", f.pid);
+                e.put("checkpid", f.pid);
+                e.put("costume", f.costume);
+                e.put("img", "");
+                e.put("country", f.country);
+            }
+            e.put("score", a[1]);
             e.put("stars", 0);
-            e.put("costume", p.optLong("costume", 0));
-            e.put("img", p.optString("img", ""));
-            e.put("country", p.optString("deviceCountry", ""));
-            e.put("rank", 1);
+            e.put("rank", r);
             entries.put(e);
         }
         JSONObject out = new JSONObject();

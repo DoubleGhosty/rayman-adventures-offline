@@ -29,6 +29,7 @@ Ubisoft shut down the servers of *Rayman Adventures* on June 26, 2023. Since the
 - **Packs for gems**: the packs that cost real money are sold for gems instead: event currency, challenge tokens, and the special packs of the shop ("Le Must-have pack" and the next ones: costumes, elixirs, tickets...). A pack costs about 20% less than its contents bought one by one.
 - **3 save slots** (the "Sauvegardes" button on the title screen), with **save codes**: the orange button of a slot gives a code, and the purple button of an empty slot copies that game into it (handy to keep a backup or start a second copy). Codes work on the same phone only and stay valid 7 days.
 - **Achievements** with their rewards.
+- **Leaderboards with other players**: the "Classement" tree and the daily challenge ranking are filled with fictional players (names, countries, costumes, Incrediballs you can visit). The challenge ranking is for fun: every rank gets the reward.
 - **No ads**: the "Regarder une publicité" buttons (free wheel spin, daily gift bonus, revive, mission change, adventure time extension...) give their reward right away, without any video. Forced ads are removed too.
 - Play with a **controller** (Xbox and others): connect it **before** launching the game.
 
@@ -40,7 +41,7 @@ These needed services that are gone for good:
 
 - Buying gems with **real money**. You earn gems by playing. (The time-saving subscriptions, perk packs and new-creature egg packs are gone too.)
 - **Facebook**: login, friends, gifts between friends.
-- **Worldwide leaderboards**: you're the only player.
+- **Real players** in the leaderboards (the ones you see are fictional), and Facebook friends.
 - **Cloud save**, and save codes **between two phones** (a code only works on the phone that made it).
 - The **Google Play Games** login was removed, as it could never work again.
 

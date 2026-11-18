@@ -72,6 +72,11 @@ public final class OfflineServer {
             Log.e(TAG, "ticket_weights.json asset missing", e);
         }
         try {
+            FictionalPlayers.loadCreatures(new String(readAsset(app, "offline/creatures.json"), UTF8));
+        } catch (IOException e) {
+            Log.e(TAG, "creatures.json asset missing", e);
+        }
+        try {
             SeasonalEvents.loadUbisoftOverrides(new String(readAsset(app, "offline/ubisoft_gameglobals.json"), UTF8));
         } catch (IOException e) {
             Log.e(TAG, "ubisoft_gameglobals.json asset missing", e);

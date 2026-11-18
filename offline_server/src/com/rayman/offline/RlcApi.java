@@ -157,7 +157,7 @@ final class RlcApi {
                 return Challenges.leaderboardConfig();
             }
             if (action.equals("leaderboard")) {
-                return Challenges.leaderboard();
+                return Challenges.leaderboard(in);
             }
             if (action.equals("setCollected")) {
                 return Challenges.setCollected();
@@ -202,7 +202,7 @@ final class RlcApi {
                 return Leaderboards.shortProfiles(in);
             }
             if (action.equals("getUserProfile")) {
-                return Leaderboards.userProfile();
+                return Leaderboards.userProfile(in);
             }
             if (action.equals("sns")) {
                 return new JSONObject();    // social network ids, nothing to link offline

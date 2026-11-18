@@ -36,7 +36,8 @@ The release APK also embeds the game data (the OBB): `res/raw/game.properties` s
 | `SaveCodes.java` | Save codes of the Sauvegardes menu (copy a game into another slot) |
 | `Incubator.java` | Incubator, hatching, elixirs, Charlie, magnifying glass |
 | `Rewards.java` | Lucky ticket draws with Ubisoft's own weight tables |
-| `DailyRewards.java`, `Challenges.java`, `Ghosts.java`, `Leaderboards.java` | Daily gift, daily challenge, ghosts, local leaderboards |
+| `DailyRewards.java`, `Challenges.java`, `Ghosts.java`, `Leaderboards.java` | Daily gift, daily challenge, ghosts, leaderboards |
+| `FictionalPlayers.java` | Fictional players of the leaderboards (names, countries, costumes, stars, Incrediballs), derived from a hash: nothing stored |
 | `MiniEvents.java` | Weekend mini events |
 | `SeasonalEvents.java` | Seasonal events calendar, sent as encrypted game globals |
 | `Admin.java` | Debug endpoints (see below) |
