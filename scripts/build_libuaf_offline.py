@@ -212,6 +212,18 @@ for off, patch in assemble_event_text_hooks(data).items():
     data[off:off + len(patch)] = patch
 print("Applied event text hook (costume names).")
 
+# --- No Facebook "Play with friends!" popup (scripts/social_hooks.py) ---
+from social_hooks import assemble as assemble_social_hooks
+for off, patch in assemble_social_hooks(data).items():
+    data[off:off + len(patch)] = patch
+print("Applied social hooks (no Facebook benefits popup).")
+
+# --- Shops' free "watch an ad" cards: 5 a day each (scripts/ad_cap_hooks.py) ---
+from ad_cap_hooks import assemble as assemble_ad_cap_hooks
+for off, patch in assemble_ad_cap_hooks(data).items():
+    data[off:off + len(patch)] = patch
+print("Applied ad cap hook (5 free rewards a day per shop).")
+
 if "--debug" in sys.argv:
     from debug_hooks import assemble as assemble_debug_hooks
     dbg = assemble_debug_hooks()

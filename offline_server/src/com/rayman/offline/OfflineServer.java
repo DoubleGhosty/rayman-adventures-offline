@@ -339,7 +339,7 @@ public final class OfflineServer {
 
     /**
      * Store catalogue (GET iap-mob /store/v2/?...&language=fr&gzip=1). The packs sold for gems show the
-     * price "<n> {gems}" (scripts/store_packs.py): the word is put in the player's language.
+     * price "<n> {gems}" (scripts/store_packs.py): the word is put in the game's language.
      *
      * With gzip=1 the Mobile SDK inflates the body itself (zlib inflateInit2, windowBits 31 = gzip,
      * libuaf 0x1a1d820) without any Content-Encoding header: a plain JSON body gives "Dynamic store
@@ -362,17 +362,32 @@ public final class OfflineServer {
         }
     }
 
+    /**
+     * Word for gems of each game language, by ITF language index (the profile's "lang": the language
+     * chosen in the game, not the phone's), from the game's own text 0x345 ("GEMS", "GEMMES"...).
+     */
+    private static final String[] GEMS_WORD = {"gems", "gemmes", "ジェム", "Juwelen", "gemas", "gemme",
+            "보석", "寶石", "宝石", "самоцветы", "ædelsten", "steiner", "ädelstenar", "jalokiveä", "joias",
+            "cevher", "جواهر"};
+
     private static byte[] localizedCatalog(String path) {
-        java.util.regex.Matcher m = java.util.regex.Pattern.compile("[?&]language=([a-zA-Z]+)").matcher(path);
-        String lang = m.find() ? m.group(1).toLowerCase(java.util.Locale.US) : "en";
-        String word;
-        switch (lang) {
-            case "fr": word = "gemmes"; break;
-            case "de": word = "Juwelen"; break;
-            case "es": case "pt": word = "gemas"; break;
-            case "it": word = "gemme"; break;
-            case "nl": word = "edelstenen"; break;
-            default: word = "gems"; break;
+        String word = null;
+        int lang = ProfileStore.get().optInt("lang", -1);
+        if (lang >= 0 && lang < GEMS_WORD.length) {
+            word = GEMS_WORD[lang];
+        } else {
+            // no profile yet: the phone's language, sent by the store request
+            java.util.regex.Matcher m = java.util.regex.Pattern.compile("[?&]language=([a-zA-Z]+)").matcher(path);
+            String code = m.find() ? m.group(1).toLowerCase(java.util.Locale.US) : "en";
+            String[] codes = {"en", "fr", "ja", "de", "es", "it", "ko", "zh", "zh", "ru", "da", "no", "sv",
+                    "fi", "pt", "tr", "ar"};
+            word = GEMS_WORD[0];
+            for (int i = 0; i < codes.length; i++) {
+                if (codes[i].equals(code)) {
+                    word = GEMS_WORD[i];
+                    break;
+                }
+            }
         }
         return new String(storeData, UTF8).replace("{gems}", word).getBytes(UTF8);
     }

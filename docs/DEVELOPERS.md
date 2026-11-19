@@ -20,7 +20,7 @@ OfflineServerProvider (a ContentProvider, started by Android before any activity
 
 Three kinds of changes make this work:
 
-- **Native patches and hooks** in `lib/arm64-v8a/libuaf.so`: network redirection, TLS check removed, and small code caves where the game needed a server answer that can no longer be produced the same way (eggs, tickets, incubator, shop guards, events that come back every year, the event shop's costume card and the event texts that name it, exclusive costumes sold for gems, real-money packs paid with gems, the title-screen login). See `scripts/*_hooks.py`.
+- **Native patches and hooks** in `lib/arm64-v8a/libuaf.so`: network redirection, TLS check removed, and small code caves where the game needed a server answer that can no longer be produced the same way (eggs, tickets, incubator, shop guards, events that come back every year, the event shop's costume card and the event texts that name it, exclusive costumes sold for gems, real-money packs paid with gems, the shops' free ad cards limited to 5 a day, no Facebook popup, the title-screen login). See `scripts/*_hooks.py`.
 - **The embedded server** (`offline_server/src/com/rayman/offline/`, compiled to an extra `classesN.dex`) answers every request the game makes. It keeps its state per save slot in the app's `files/rlc/` folder.
 - **Small bytecode patches** to the game's own Java code (`scripts/dex_patches.py`): the Google Play Games sign-in is disabled, and the rewarded-video buttons give their reward without showing an ad.
 
@@ -30,7 +30,7 @@ The release APK also embeds the game data (the OBB): `res/raw/game.properties` s
 
 | File | What it serves |
 |---|---|
-| `OfflineServer.java` | HTTP/TLS server, UbiServices (session, configuration), store catalog (gzipped, price word in the player's language), routing |
+| `OfflineServer.java` | HTTP/TLS server, UbiServices (session, configuration), store catalog (gzipped, price word in the game's language), routing |
 | `News.java` | Title screen "Actualités" page: current and next seasonal events, weekend mini event, daily challenge (French or English) |
 | `RlcApi.java` | Game server entry point (`/v<N>/<module>/<action>`), profile, session, save slots |
 | `Slots.java`, `ProfileStore.java`, `ServerState.java` | Per-slot player profile and server-side state |
@@ -117,7 +117,3 @@ A new seasonal calendar reaches the game only through `userprofile/meta` sent af
 ## Known limits and ideas
 
 - Only tested on WSA, not yet on a real ARM64 phone.
-
-### To do
-
-- **Move a save to another phone.** Save codes (`SaveCodes.java`) only work on the phone that made them. Export a game as a file (profile + server state + ghost, like a code snapshot) and import it on another phone, for example from the Sauvegardes menu or a share/file picker in the app.
